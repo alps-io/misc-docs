@@ -1,0 +1,4 @@
+Dependency Management Guidelines
+--------------------------------
+The following discusses guidelines for managing dependencies on external ALPS 
+profiles and situations that may arise as referenced profiles evolve over time.

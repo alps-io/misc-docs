@@ -1,0 +1,15 @@
+Authoring Guidelines
+--------------------
+The following discusses guidelines to address various nuances of creating and 
+modifying well-structured, useable ALPS profiles.
+ 
+Backwards Compatibility/Promises
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How not to break dependant profiles/hypermedia contracts over time. How/if to 
+deprecate.
+
+Structure recommendations
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Allow unique determination of descriptors associated with semantics and 
+transitions in Hypermedia responses using structure and scope recommendations 
+to resolve ambiguity.

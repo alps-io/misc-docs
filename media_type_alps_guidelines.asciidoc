@@ -1,0 +1,13 @@
+Media-type ALPS Spec. Guidelines
+--------------------------------
+How to specify media-type specific instructions on ALPS correlation to semantic 
+and transition elements. 
+
+General Considerations
+~~~~~~~~~~~~~~~~~~~~~~
+Universal ALPS correlation ideas that apply to all media-types and the 
+recommended aspects that should be extended
+
+Media-Type Specific Considerations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Definition of extended understanding for the particular media-type.
