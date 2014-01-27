@@ -1,0 +1,899 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.4" />
+<title>ALPS Mapping Guidelines for HTML</title>
+<style type="text/css">
+/* Sans-serif font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+div#toctitle,
+span#author, span#revnumber, span#revdate, span#revremark,
+div#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+/* Serif font. */
+div.sectionbody {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Monospace font. */
+tt {
+  font-size: inherit;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  font-size: inherit;
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revnumber, span#revdate, span#revremark {
+}
+
+div#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>ALPS Mapping Guidelines for HTML</h1>
+<span id="author">Mike Amundsen</span><br />
+<span id="email"><tt>&lt;<a href="mailto:mca@mamund.com">mca@mamund.com</a>&gt;</tt></span><br />
+<span id="revdate">January 27, 2014</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_summary">Summary</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This document provides guidance on mapping ALPS descriptions to HTML representations. It is provided as a guide for those writing servers that will use ALPS profiles to generate HTML and for those writing client applications that will use ALPS profiles to "recognize" ALPS descriptors within the HTML document.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_review_of_alps_principles">A Review of ALPS Principles</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The Application-Level Profile Semantic(ALPS)<a href="#0">[0]</a> specification is designed to describe the data elements and state transitions that make up a <em>problem domain</em> (e.g. microblogging, accounting, etc.). ALPS documents are designed to be useful to both client and server implementors and can be used at both run-time and design-time to handle the generation and interpretation of response representations. ALPS description documents are referred to as <em>profiles</em> or <em>profile documents</em>.</p></div>
+<div class="paragraph"><p>Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime <em>behavior</em> of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profliesin order to create an actual instance of a service or client application.</p></div>
+<div class="sect2">
+<h3 id="_servers_and_clients">Servers and Clients</h3>
+<div class="paragraph"><p>For server implementors, ALPS profiles establish the list of possible identifiers for data values (<tt>givenName</tt>, <tt>familyName</tt>, etc.) and transitions (<tt>publish</tt>, <tt>createUser</tt>, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is <em>safe</em> or <em>idempotent</em> and, in some cases, whether there are any possible arguments that can be passed with each transition.</p></div>
+<div class="paragraph"><p>For client implementors can use the same ALPS document to as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recongize all the important data elements and state transitions emitted by that service.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advertising_alps_profiles_for_html_representations">Advertising ALPS Profiles for HTML Representations</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Servers returning HTML responses can advertise the ALPS profiles they support using the following methods:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Link Header
+</dt>
+<dd>
+<p>
+  Responses can include the <tt>Link</tt> header<a href="#2">[2]</a> with the <tt>href</tt> value set to the URL of the ALPS profile document and the <tt>rel</tt> value set to "profile."<br>
+  <tt>Link: <a href="http://alps.io/profiles/microblogging">http://alps.io/profiles/microblogging</a>; rel="profile"</tt>
+</p>
+</dd>
+<dt class="hdlist1">
+HTML4 <tt>profile</tt> attribute
+</dt>
+<dd>
+<p>
+  HTML4 documents can use the <tt>profile</tt> <a href="#3">[3]</a> attribute on the <tt>HTML.HEAD</tt> element. the <tt>profile</tt> attribute value SHOULD be set to the URL of the ALPS profile document.<br>
+  <tt>&lt;head profile="http://alps.io/profiles/microblogging"&gt;&#8230;&lt;/head&gt;</tt>
+</p>
+</dd>
+<dt class="hdlist1">
+HTML5 <tt>link</tt> element
+</dt>
+<dd>
+<p>
+  HTML5 documents can use the <tt>Link</tt> element<a href="#4">[4]</a> with the <tt>href</tt> value set to the URL of the ALPS profile document and the <tt>rel</tt> value set to "profile."<br>
+  <tt>&lt;link href="http://alps.io/profiles/microblogging" rel="profile" /&gt;</tt>
+</p>
+</dd>
+</dl></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>It is valid for a service to advertise support for more than one ALPS profile for the same response. For example, a single response from a server might include the following <tt>LINK</tt> header:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>LINK: &lt;http://alps.io/profiles/finance&gt;;rel="profile", &lt;http://alps.io/profiles/accounting&gt;;rel="profile"</tt></pre>
+</div></div>
+<div class="paragraph"><p>In the above case, The client application has been informed that the response MAY contain data elements and state transitions from both the <em>finance</em> and the <em>accounting</em> ALPS profiles.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Clients accepting HTML responses SHOULD look for the ALPS profile in each of these places as appropriate to the response. If an ALPS profile reference appears in more than one location (e.g. <tt>LINK</tt> header, <tt>HTML.HEAD@profile</tt> attribute, and/or <tt>HTML.LINK</tt> element) <strong>all</strong> profiles SHOULD be considered valid.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_mapping_rules_for_alps_to_html">Basic Mapping Rules for ALPS to HTML</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following are the basic rules for rendering ALPS profile information into valid HTML representations.</p></div>
+<div class="sect2">
+<h3 id="_the_alps_tt_descriptor_id_tt_property">The ALPS <tt>descriptor.id</tt> property</h3>
+<div class="paragraph"><p>The <tt>ALPS.descriptor.id</tt> SHOULD be transformed into an HTML <tt>class</tt> property. Below are several valid examples:</p></div>
+<div class="listingblock">
+<div class="title">Applying <tt>descriptor.id</tt> to HTML elements</div>
+<div class="content">
+<pre><tt>&lt;!-- ALPS document --&gt;
+&lt;descriptor id="abc" ... /&gt;
+
+&lt;!-- HTML read-only elements --&gt;
+&lt;div class="abc"&gt;...&lt;/div&gt;
+&lt;span class="abc"&gt;...&lt;/div&gt;
+&lt;li class="abc"&gt;...&lt;/li&gt;
+&lt;p class="abc"&gt;...&lt;/p&gt;
+
+&lt;!-- HTML state transition elements --&gt;
+&lt;input type="text" class="abc" /&gt;
+&lt;a href="..." class="abc" /&gt;
+&lt;img src="..." class="abc" /&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>The exception to this rule is when the ALPS <tt>descriptor.name</tt> property is present. In that case the <tt>class</tt> property of the HTML element should be set to the value of the <tt>descriptor.name</tt> property in the ALPS document. The ALPS <tt>descriptor.id</tt> SHOULD also be included in the HTML representation using an HTML5 Custom Data Attribute<a href="#1">[1]</a> <tt>data-alpsid</tt>. Below are several valid examples:</p></div>
+<div class="listingblock">
+<div class="title">Applying <tt>descriptor.name</tt> to HTML elements</div>
+<div class="content">
+<pre><tt>&lt;!-- ALPS document --&gt;
+&lt;descriptor id="abc" name="xyz" ... /&gt;
+&lt;descriptor id="abc2" name="xyz" ... /&gt;
+
+&lt;!-- HTML read-only elements --&gt;
+&lt;div class="xyz" data-alpsid="abc"&gt;...&lt;/div&gt;
+  &lt;span class="xyz" data-alpsid="abc2"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- HTML state transition elements --&gt;
+&lt;input type="text" class="xyz" data-alpsid="abc2"/&gt;
+&lt;a href="..." class="xyz" data-alpsid="abc"/&gt;</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_the_alps_tt_descriptor_type_tt_property">The ALPS <tt>descriptor.type</tt> property</h3>
+<div class="paragraph"><p>The <tt>descriptor.type</tt> value is used to determine whether the HTML element should be rendered as a &#8216;value` element (e.g. <tt>span</tt>, <tt>input</tt>, etc.) or a `transition&#8217; element (e.g. <tt>form</tt>, <tt>a</tt>. <tt>img</tt>, etc.). Below is a table showing the various possibilities:</p></div>
+<div class="tableblock">
+<table rules="rows"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top"><tt>descriptor.type</tt> Value</th>
+<th align="left" valign="top">HTML Element</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">safe</p></td>
+<td align="left" valign="top"><p class="table">HTML.A|IMG|IFRAME|FORM@mmethod="get"</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">unsafe</p></td>
+<td align="left" valign="top"><p class="table">HTML.FORM@method="post"</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">idempotent</p></td>
+<td align="left" valign="top"><p class="table">HTML.FORM@method="post"<sup>1</sup></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">semantic</p></td>
+<td align="left" valign="top"><p class="table">HTML.SPAN|DIV|P|INPUT|LI|DT|DD|SECTION|&#8230;|FORM@method="get"<sup>2</sup></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Since HTML does not support idempontent transitions, the HTML.FORM element with the <tt>method="post"</tt> property SHOULD be used. Server implementors are encouraged to use an additional information in the transition in order to ensure idempotency of the request. Some examples are 1) adding a unique value to the URL in the <tt>action</tt> property, 2) using an additional <tt>INPUT</tt> element that holds a unique value used to enforce idempotency, etc.
+</p>
+</li>
+<li>
+<p>
+In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.type="semantic"</tt> element. For example, a server might represent a <tt>computedResult</tt> as an <tt>HTML.SPAN</tt> element,. However, if the result is not yet computed, the server may represent <tt>computedResult</tt> as an <a href="mailto:HTML.FORM@method">HTML.FORM@method</a>="get" with one or more <tt>HTML.INPUT</tt> elements allowing the client application to fill in values in order to generate the value <tt>computedResult</tt>.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mapping_examples">Mapping Examples</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Below are some examples to use as guides when mapping between ALPS and HTML.</p></div>
+<div class="sect2">
+<h3 id="_search_example">Search Example</h3>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;!-- ALPS Profile --&gt;
+&lt;alps&gt;
+  &lt;link rel="self" href="http://alps.io/profiles/search" /&gt; <b>&lt;1&gt;</b>
+  &lt;descriptor id="search" type="safe"&gt; <b>&lt;2&gt;</b>
+    &lt;descriptor id="text" type="semantic"&gt; <b>&lt;3&gt;</b>
+  &lt;/descriptor&gt;
+&lt;/alps&gt;
+
+&lt;!-- HTML5 Representation --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="profile" href="http://alps.io/profiles/search" /&gt; <b>&lt;4&gt;</b>
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action="..." method="get"&gt;
+      &lt;input type="text" name="q" class="text" value="" /&gt; <b>&lt;5&gt;</b>
+      &lt;input type="submit" class="search" /&gt; <b>&lt;6&gt;</b>
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_user_account_example">User Account Example</h3>
+<div class="paragraph"><p>This example shows an ALPS profile that describes both reading and writing operations on a user account. It is also structured as a &#8216;flat&#8217; ALPS document. The data elements (&lt;2&gt;) are listed separately from the transition elements (&lt;3&gt;). The profile does not constrain any server implementations to specific parameters for transitions; each server can select the data elements that best fit that server&#8217;s use cases.</p></div>
+<div class="listingblock">
+<div class="title">ALPS User Account Profile</div>
+<div class="content">
+<pre><tt>&lt;alps&gt;
+  &lt;link rel="self" href="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+
+  &lt;!-- data elements --&gt; <b>&lt;2&gt;</b>
+  &lt;descriptor id="user" type="semantic" /&gt;
+  &lt;descriptor id="accessCode" type="semantic" /&gt;
+  &lt;descriptor id="givenName" type="semantic" /&gt;
+  &lt;descriptor id="familyName" type="semantic" /&gt;
+  &lt;descriptor id="email" type="semantic" /&gt;
+  &lt;descriptor id="telephone" type="semantic" /&gt;
+
+  &lt;!-- transitions --&gt; <b>&lt;3&gt;</b>
+  &lt;descriptor id="list" type="safe" /&gt; <b>&lt;4&gt;</b>
+  &lt;descriptor id="detail" type="safe" /&gt; <b>&lt;5&gt;</b>
+  &lt;descriptor id="login-link" type="safe" name="login" /&gt; <b>&lt;6&gt;</b>
+  &lt;descriptor id="login-form" type="unsafe" name="login" /&gt; <b>&lt;7&gt;</b>
+  &lt;descriptor id="create-link" type="safe" name="create"/&gt; <b>&lt;7&gt;</b>
+  &lt;descriptor id="create-form" type="unsafe" "name="create/&gt; <b>&lt;8&gt;</b>
+  &lt;descriptor id="update-link" type="safe" name="update"/&gt; <b>&lt;9&gt;</b>
+  &lt;descriptor id="update-form" type="idempotent" /&gt; <b>&lt;10&gt;</b>
+  &lt;descriptor id="remove-link" type="safe" /&gt; <b>&lt;11&gt;</b>
+  &lt;descriptor id="remove-form" type="idempotent" /&gt; <b>&lt;12&gt;</b>
+
+&lt;/alps&gt;</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">HTML5 Representation of a list of users (with link to login and creating new accounts)</div>
+<div class="content">
+<pre><tt>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;User List&lt;/title&gt;
+    &lt;link rel="profile" href="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;User List&lt;/h1&gt;
+
+    &lt;h2&gt;Menu&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="..." rel="collection" class="list"&gt;Refresh List&lt;/a&gt;&lt;/li&gt; <b>&lt;4&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="http://example.org/rels/login" class="login" data-alspid="login-link"&gt;Login&lt;/a&gt;&lt;/li&gt; <b>&lt;6&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="create-form" class="create" data-alpsid="create-link"&gt;Create Account&lt;/a&gt;&lt;/li&gt; <b>&lt;7&gt;</b>
+    &lt;/ul&gt;
+
+    &lt;h2&gt;Currrent Users&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Mary&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Mark&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Mandy&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Manfred&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Michelle&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+      &lt;li&gt;&lt;a href="..." rel="item" class="detail"&gt;Michael&lt;/a&gt;&lt;/li&gt; <b>&lt;5&gt;</b>
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>In the above HTML5 example, the Menu section shows the use of the <tt>login-link</tt> and <tt>create-link</tt> ALPS decriptors applied to <tt>HTML.A</tt> elements that use the associated <tt>descriptor.name</tt> value for the HTML <tt>class</tt> value. Both these HTML anchors have the RECOMMENDED HTML5 Custom Data Attribute of <tt>data-alpsid</tt>.</p></div>
+<div class="paragraph"><p>The following HTML4 representation is an example of what might be returned when a client application activates the <tt>login-link</tt>:</p></div>
+<div class="listingblock">
+<div class="title">HTML4 Representation for creating a new user account.</div>
+<div class="content">
+<pre><tt>&lt;html&gt;
+  &lt;head profile="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+    &lt;title&gt;Create Account&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Update Account&lt;/h1&gt;
+    &lt;form action="..." method="post"&gt;
+      &lt;label&gt;User Name:&lt;input name="user" class="user" /&gt;&lt;/label&gt;
+      &lt;label&gt;First Name:&lt;input name="firstname" class="givenName" /&gt;&lt;/label&gt;
+      &lt;label&gt;Last Name:&lt;input name="lastname" class="familyName" /&gt;&lt;/label&gt;
+      &lt;label&gt;Email:&lt;input name="email" class="email" /&gt;&lt;/label&gt;
+      &lt;label&gt;SMS:&lt;input name="sms" class="telephone" /&gt;&lt;/label&gt;
+      &lt;input type="submit" value="Save" class="create" /&gt; <b>&lt;8&gt;</b>
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>What follows is an HTML response that might be returned when activating a <tt>detail</tt> link:</p></div>
+<div class="listingblock">
+<div class="title">HTML4 Representation for updating an existing user account.</div>
+<div class="content">
+<pre><tt>&lt;html&gt;
+  &lt;head profile="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+    &lt;title&gt;Update Account&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Create User Account&lt;/h1&gt;
+    &lt;form action="..." method="post"&gt;
+      &lt;input type="hidden" name="etag" value="q1w2e3r4t5y6" /&gt; <b>&lt;13&gt;</b>
+      &lt;label&gt;User Name:&lt;span class="user"&gt;mamund&lt;/span&gt;&lt;/label&gt;
+      &lt;label&gt;First Name:&lt;input name="firstname" class="givenName" /&gt;&lt;/label&gt;
+      &lt;label&gt;Last Name:&lt;input name="lastname" class="familyName" /&gt;&lt;/label&gt;
+      &lt;label&gt;Email:&lt;input name="email" class="email" /&gt;&lt;/label&gt;
+      &lt;label&gt;SMS:&lt;input name="sms" class="telephone" /&gt;&lt;/label&gt;
+      &lt;input type="submit" value="Save" class="update" /&gt; <b>&lt;10&gt;</b>
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>Note that the <tt>&lt;input type="hidden" &#8230; /&gt;</tt> (&lt;13&gt;) was added by the server in order to ensure the <tt>HTML.FORM@method="post"</tt> transition can support idempotency as described in the ALPS profile (&lt;10&gt;). This is just one way for servers to ensure idempotency for HTML transitions. The implementation details are left to each service.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><a id="0"></a> 0. <a href="http://alps.io/spec">http://alps.io/spec</a></p></div>
+<div class="paragraph"><p><a id="1"></a> 1. <a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#attr-data">http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#attr-data</a></p></div>
+<div class="paragraph"><p><a id="2"></a> 2. <a href="http://tools.ietf.org/search/rfc5988#section-5">http://tools.ietf.org/search/rfc5988#section-5</a></p></div>
+<div class="paragraph"><p><a id="3"></a> 3. <a href="http://www.w3.org/TR/html4/struct/global.html#adef-profile">http://www.w3.org/TR/html4/struct/global.html#adef-profile</a></p></div>
+<div class="paragraph"><p><a id="4"></a> 4. <a href="http://www.w3.org/html/wg/drafts/html/CR/document-metadata.html#the-link-element">http://www.w3.org/html/wg/drafts/html/CR/document-metadata.html#the-link-element</a></p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-01-26 22:44:05 EST
+</div>
+</div>
+</body>
+</html>
