@@ -152,9 +152,9 @@ This example shows an ALPS profile that describes both reading and writing opera
   <descriptor id="create-link" type="safe" name="create"/> <7>
   <descriptor id="create-form" type="unsafe" "name="create/> <8>
   <descriptor id="update-link" type="safe" name="update"/> <9>
-  <descriptor id="update-form" type="idempotent" /> <10>
-  <descriptor id="remove-link" type="safe" /> <11>
-  <descriptor id="remove-form" type="idempotent" /> <12>
+  <descriptor id="update-form" type="idempotent" name="update" /> <10>
+  <descriptor id="remove-link" type="safe" name="remove" /> <11>
+  <descriptor id="remove-form" type="idempotent" name="remove" /> <12>
   
 </alps>
 ----
