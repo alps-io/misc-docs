@@ -98,31 +98,30 @@ The +descriptor.type+ value is used to determine whether the HTML element should
 |===============================
 1. Since HTML does not support idempontent transitions, the HTML.FORM element with the +method="post"+ property SHOULD be used. Server implementors are encouraged to use an additional information in the transition in order to ensure idempotency of the request. Some examples are 1) adding a unique value to the URL in the +action+ property, 2) using an additional +INPUT+ element that holds a unique value used to enforce idempotency, etc.
 
-2. In some cases, servers MAY use a "safe" transition to express a +descriptor.type="semantic"+ element. For example, a server might represent a +computedResult+ as an +HTML.SPAN+ element,. However, if the result is not yet computed, the server may represent +computedResult+ as an HTML.FORM@method="get" with one or more +HTML.INPUT+ elements allowing the client application to fill in values in order to generate the value +computedResult+.
+2. In some cases, servers MAY use a "safe" transition to express a +descriptor.type="semantic"+ element. For example, a server might represent a +computedResult+ as an +HTML.SPAN+ element,. However, if the result is not yet computed, the server may represent +computedResult+ as an +HTML.FORM+++@+++method="get"+ with one or more +HTML.INPUT+ elements allowing the client application to fill in values in order to generate the value +computedResult+.
 
 == Mapping Examples
 Below are some examples to use as guides when mapping between ALPS and HTML.
 
 === Search Example
+This is a very simple ALPS profile that defines a single semantic descriptor ("text") and a single safe descriptor ("search"). This profile describes the essence of the front end of any simple web-based search engine. Mapping this ALPS profile to an HTML4 document is rather straight-forward.
 
 ----
 <!-- ALPS Profile -->
 <alps>
   <link rel="self" href="http://alps.io/profiles/search" /> <1>
-  <descriptor id="search" type="safe"> <2>
-    <descriptor id="text" type="semantic"> <3>
-  </descriptor>
+  <descriptor id="text" type="semantic"> <2>
+  <descriptor id="search" type="safe"> <3>
 </alps>
 
-<!-- HTML5 Representation -->
+<!-- HTML4 Representation -->
 <html>
-  <head>
-    <link rel="profile" href="http://alps.io/profiles/search" /> <4>
+  <head profile="http://alps.io/profiles/search"> <1>
   </head>
   <body>
     <form action="..." method="get">
-      <input type="text" name="q" class="text" value="" /> <5>
-      <input type="submit" class="search" /> <6>
+      <input type="text" name="q" class="text" value="" /> <2>
+      <input type="submit" class="search" /> <3>
     </form>
   </body>
 </html>
@@ -190,23 +189,24 @@ This example shows an ALPS profile that describes both reading and writing opera
 ----
 In the above HTML5 example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS decriptors applied to +HTML.A+ elements that use the associated +descriptor.name+ value for the HTML +class+ value. Both these HTML anchors have the RECOMMENDED HTML5 Custom Data Attribute of +data-alpsid+.
 
-The following HTML4 representation is an example of what might be returned when a client application activates the +login-link+:
+The following HTML5 representation is an example of what might be returned when a client application activates the +login-link+:
       
-.HTML4 Representation for creating a new user account.
+.HTML5 Representation for creating a new user account.
 ----
 <html>
-  <head profile="http://alps.io/profiles/useraccount"> <1>
+  <head>
     <title>Create Account</title>
+    <link rel="profile" href="http://alps.io/profiles/useraccount" /> <1>
   </head>
   <body>
-    <h1>Update Account</h1>
+    <h1>Create Account</h1>
     <form action="..." method="post">
       <label>User Name:<input name="user" class="user" /></label>
       <label>First Name:<input name="firstname" class="givenName" /></label>
       <label>Last Name:<input name="lastname" class="familyName" /></label>
       <label>Email:<input name="email" class="email" /></label>
       <label>SMS:<input name="sms" class="telephone" /></label>
-      <input type="submit" value="Save" class="create" /> <8>
+      <input type="submit" value="Save" class="create" data-alpsid="create-form" /> <8>
     </form>
   </body>
 </html>
@@ -214,14 +214,15 @@ The following HTML4 representation is an example of what might be returned when 
 
 What follows is an HTML response that might be returned when activating a +detail+ link:
 
-.HTML4 Representation for updating an existing user account.
+.HTML5 Representation for updating an existing user account.
 ----
 <html>
-  <head profile="http://alps.io/profiles/useraccount"> <1>
+  <head>
     <title>Update Account</title>
+    <link rel="profile" href="http://alps.io/profiles/useraccount" /> <1>
   </head>
   <body>
-    <h1>Create User Account</h1>
+    <h1>Update Account</h1>
     <form action="..." method="post">
       <input type="hidden" name="etag" value="q1w2e3r4t5y6" /> <13>
       <label>User Name:<span class="user">mamund</span></label>
@@ -229,12 +230,30 @@ What follows is an HTML response that might be returned when activating a +detai
       <label>Last Name:<input name="lastname" class="familyName" /></label>
       <label>Email:<input name="email" class="email" /></label>
       <label>SMS:<input name="sms" class="telephone" /></label>
-      <input type="submit" value="Save" class="update" /> <10>
+      <input type="submit" value="Save" class="update" data-alspid="update-form"/> <10>
     </form>
   </body>
 </html>
 ----
-Note that the +<input type="hidden" ... />+ (<13>) was added by the server in order to ensure the +HTML.FORM+++@+++method="post"+ transition can support idempotency as described in the ALPS profile (<10>). This is just one way for servers to ensure idempotency for HTML transitions. The implementation details are left to each service.
+Note that the +<input type="hidden" name="etag" ... />+ (<13>) was added in the response (by the server) in order to ensure the +HTML.FORM+++@+++method="post"+ transition can support idempotency as described in the ALPS profile (<10>). This is just one way for servers to ensure idempotency for HTML transitions. The implementation details are left to each service.
+
+The same approach is used to support an idempotent "remove" operation in this next HTML representation:
+
+.HTML5 Representation for removing an existing user account.
+----
+<html>
+  <head profile="http://alps.io/profiles/useraccount"> <1>
+    <title>Remove Account</title>
+  </head>
+  <body>
+    <h1>Remove Account</h1>
+    <form action="..." method="post">
+      <input type="hidden" name="etag" value="q1w2e3r4t5y6" /> <13>
+      <input type="submit" value="Remove" class="remove" data-alpsid="remove-form" /> <12>
+    </form>
+  </body>
+</html>
+----
 
 == References
 

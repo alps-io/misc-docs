@@ -732,7 +732,7 @@ Since HTML does not support idempontent transitions, the HTML.FORM element with 
 </li>
 <li>
 <p>
-In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.type="semantic"</tt> element. For example, a server might represent a <tt>computedResult</tt> as an <tt>HTML.SPAN</tt> element,. However, if the result is not yet computed, the server may represent <tt>computedResult</tt> as an <a href="mailto:HTML.FORM@method">HTML.FORM@method</a>="get" with one or more <tt>HTML.INPUT</tt> elements allowing the client application to fill in values in order to generate the value <tt>computedResult</tt>.
+In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.type="semantic"</tt> element. For example, a server might represent a <tt>computedResult</tt> as an <tt>HTML.SPAN</tt> element,. However, if the result is not yet computed, the server may represent <tt>computedResult</tt> as an <tt>HTML.FORM@method="get"</tt> with one or more <tt>HTML.INPUT</tt> elements allowing the client application to fill in values in order to generate the value <tt>computedResult</tt>.
 </p>
 </li>
 </ol></div>
@@ -745,25 +745,24 @@ In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.t
 <div class="paragraph"><p>Below are some examples to use as guides when mapping between ALPS and HTML.</p></div>
 <div class="sect2">
 <h3 id="_search_example">Search Example</h3>
+<div class="paragraph"><p>This is a very simple ALPS profile that defines a single semantic descriptor ("text") and a single safe descriptor ("search"). This profile describes the essence of the front end of any simple web-based search engine. Mapping this ALPS profile to an HTML4 document is rather straight-forward.</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>&lt;!-- ALPS Profile --&gt;
 &lt;alps&gt;
   &lt;link rel="self" href="http://alps.io/profiles/search" /&gt; <b>&lt;1&gt;</b>
-  &lt;descriptor id="search" type="safe"&gt; <b>&lt;2&gt;</b>
-    &lt;descriptor id="text" type="semantic"&gt; <b>&lt;3&gt;</b>
-  &lt;/descriptor&gt;
+  &lt;descriptor id="text" type="semantic"&gt; <b>&lt;2&gt;</b>
+  &lt;descriptor id="search" type="safe"&gt; <b>&lt;3&gt;</b>
 &lt;/alps&gt;
 
-&lt;!-- HTML5 Representation --&gt;
+&lt;!-- HTML4 Representation --&gt;
 &lt;html&gt;
-  &lt;head&gt;
-    &lt;link rel="profile" href="http://alps.io/profiles/search" /&gt; <b>&lt;4&gt;</b>
+  &lt;head profile="http://alps.io/profiles/search"&gt; <b>&lt;1&gt;</b>
   &lt;/head&gt;
   &lt;body&gt;
     &lt;form action="..." method="get"&gt;
-      &lt;input type="text" name="q" class="text" value="" /&gt; <b>&lt;5&gt;</b>
-      &lt;input type="submit" class="search" /&gt; <b>&lt;6&gt;</b>
+      &lt;input type="text" name="q" class="text" value="" /&gt; <b>&lt;2&gt;</b>
+      &lt;input type="submit" class="search" /&gt; <b>&lt;3&gt;</b>
     &lt;/form&gt;
   &lt;/body&gt;
 &lt;/html&gt;</tt></pre>
@@ -794,9 +793,9 @@ In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.t
   &lt;descriptor id="create-link" type="safe" name="create"/&gt; <b>&lt;7&gt;</b>
   &lt;descriptor id="create-form" type="unsafe" "name="create/&gt; <b>&lt;8&gt;</b>
   &lt;descriptor id="update-link" type="safe" name="update"/&gt; <b>&lt;9&gt;</b>
-  &lt;descriptor id="update-form" type="idempotent" name="update"/&gt; <b>&lt;10&gt;</b>
-  &lt;descriptor id="remove-link" type="safe" name="remove"/&gt; <b>&lt;11&gt;</b>
-  &lt;descriptor id="remove-form" type="idempotent" name="remove"/&gt; <b>&lt;12&gt;</b>
+  &lt;descriptor id="update-form" type="idempotent" name="update" /&gt; <b>&lt;10&gt;</b>
+  &lt;descriptor id="remove-link" type="safe" name="remove" /&gt; <b>&lt;11&gt;</b>
+  &lt;descriptor id="remove-form" type="idempotent" name="remove" /&gt; <b>&lt;12&gt;</b>
 
 &lt;/alps&gt;</tt></pre>
 </div></div>
@@ -831,37 +830,39 @@ In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.t
 &lt;/html&gt;</tt></pre>
 </div></div>
 <div class="paragraph"><p>In the above HTML5 example, the Menu section shows the use of the <tt>login-link</tt> and <tt>create-link</tt> ALPS decriptors applied to <tt>HTML.A</tt> elements that use the associated <tt>descriptor.name</tt> value for the HTML <tt>class</tt> value. Both these HTML anchors have the RECOMMENDED HTML5 Custom Data Attribute of <tt>data-alpsid</tt>.</p></div>
-<div class="paragraph"><p>The following HTML4 representation is an example of what might be returned when a client application activates the <tt>login-link</tt>:</p></div>
+<div class="paragraph"><p>The following HTML5 representation is an example of what might be returned when a client application activates the <tt>login-link</tt>:</p></div>
 <div class="listingblock">
-<div class="title">HTML4 Representation for creating a new user account.</div>
+<div class="title">HTML5 Representation for creating a new user account.</div>
 <div class="content">
 <pre><tt>&lt;html&gt;
-  &lt;head profile="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+  &lt;head&gt;
     &lt;title&gt;Create Account&lt;/title&gt;
+    &lt;link rel="profile" href="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;Update Account&lt;/h1&gt;
+    &lt;h1&gt;Create Account&lt;/h1&gt;
     &lt;form action="..." method="post"&gt;
       &lt;label&gt;User Name:&lt;input name="user" class="user" /&gt;&lt;/label&gt;
       &lt;label&gt;First Name:&lt;input name="firstname" class="givenName" /&gt;&lt;/label&gt;
       &lt;label&gt;Last Name:&lt;input name="lastname" class="familyName" /&gt;&lt;/label&gt;
       &lt;label&gt;Email:&lt;input name="email" class="email" /&gt;&lt;/label&gt;
       &lt;label&gt;SMS:&lt;input name="sms" class="telephone" /&gt;&lt;/label&gt;
-      &lt;input type="submit" value="Save" class="create" /&gt; <b>&lt;8&gt;</b>
+      &lt;input type="submit" value="Save" class="create" data-alpsid="create-form" /&gt; <b>&lt;8&gt;</b>
     &lt;/form&gt;
   &lt;/body&gt;
 &lt;/html&gt;</tt></pre>
 </div></div>
 <div class="paragraph"><p>What follows is an HTML response that might be returned when activating a <tt>detail</tt> link:</p></div>
 <div class="listingblock">
-<div class="title">HTML4 Representation for updating an existing user account.</div>
+<div class="title">HTML5 Representation for updating an existing user account.</div>
 <div class="content">
 <pre><tt>&lt;html&gt;
-  &lt;head profile="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+  &lt;head&gt;
     &lt;title&gt;Update Account&lt;/title&gt;
+    &lt;link rel="profile" href="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;Create User Account&lt;/h1&gt;
+    &lt;h1&gt;Update Account&lt;/h1&gt;
     &lt;form action="..." method="post"&gt;
       &lt;input type="hidden" name="etag" value="q1w2e3r4t5y6" /&gt; <b>&lt;13&gt;</b>
       &lt;label&gt;User Name:&lt;span class="user"&gt;mamund&lt;/span&gt;&lt;/label&gt;
@@ -869,12 +870,29 @@ In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.t
       &lt;label&gt;Last Name:&lt;input name="lastname" class="familyName" /&gt;&lt;/label&gt;
       &lt;label&gt;Email:&lt;input name="email" class="email" /&gt;&lt;/label&gt;
       &lt;label&gt;SMS:&lt;input name="sms" class="telephone" /&gt;&lt;/label&gt;
-      &lt;input type="submit" value="Save" class="update" /&gt; <b>&lt;10&gt;</b>
+      &lt;input type="submit" value="Save" class="update" data-alspid="update-form"/&gt; <b>&lt;10&gt;</b>
     &lt;/form&gt;
   &lt;/body&gt;
 &lt;/html&gt;</tt></pre>
 </div></div>
-<div class="paragraph"><p>Note that the <tt>&lt;input type="hidden" &#8230; /&gt;</tt> (&lt;13&gt;) was added by the server in order to ensure the <tt>HTML.FORM@method="post"</tt> transition can support idempotency as described in the ALPS profile (&lt;10&gt;). This is just one way for servers to ensure idempotency for HTML transitions. The implementation details are left to each service.</p></div>
+<div class="paragraph"><p>Note that the <tt>&lt;input type="hidden" name="etag" &#8230; /&gt;</tt> (&lt;13&gt;) was added in the response (by the server) in order to ensure the <tt>HTML.FORM@method="post"</tt> transition can support idempotency as described in the ALPS profile (&lt;10&gt;). This is just one way for servers to ensure idempotency for HTML transitions. The implementation details are left to each service.</p></div>
+<div class="paragraph"><p>The same approach is used to support an idempotent "remove" operation in this next HTML representation:</p></div>
+<div class="listingblock">
+<div class="title">HTML5 Representation for removing an existing user account.</div>
+<div class="content">
+<pre><tt>&lt;html&gt;
+  &lt;head profile="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+    &lt;title&gt;Remove Account&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Remove Account&lt;/h1&gt;
+    &lt;form action="..." method="post"&gt;
+      &lt;input type="hidden" name="etag" value="q1w2e3r4t5y6" /&gt; <b>&lt;13&gt;</b>
+      &lt;input type="submit" value="Remove" class="remove" data-alpsid="remove-form" /&gt; <b>&lt;12&gt;</b>
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</tt></pre>
+</div></div>
 </div>
 </div>
 </div>
@@ -892,7 +910,7 @@ In some cases, servers MAY use a "safe" transition to express a <tt>descriptor.t
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-01-26 22:44:05 EST
+Last updated 2014-01-28 18:36:18 EST
 </div>
 </div>
 </body>
