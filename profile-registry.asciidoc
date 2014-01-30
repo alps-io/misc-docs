@@ -1,0 +1,120 @@
+ALPS Registry Guidelines
+========================
+:Author: Mike Amundsen
+:Email: mca@amundsen.com
+:corpname: CA / Layer 7
+:revdate: January 29, 2014
+
+== Summary
+This document describes the ALPS<<0,[0]>> Registry Guidelines. These guidelines are used to set up and manage the ALPS Public Registry (APR). The APR holds a set of publicly available ALPS profiles along with other related material including registered ALPS Extensions. These guidelines may also be used to establish other ALPS registries.
+
+== Background 
+The goal of ALPS profiles is to provide a "shared understanding" of service descriptions for the Web. To this end, ALPS profile documents describe hypermedia interfaces (data elements and state transitions) that are helpful when implementing a services and when implement client applications that will access services. 
+
+The goal of ALPS registries is to act as a repository of available ALPS profile descriptions and ALPS extension definitions. When services implement an ALPS profile, they can advertise thier support using the appropriate protocol-level mechanisms (Link headers<<2,[2]>>, inline links<<3,[3]>>, media type parameters<<4,[4]>>, etc.). Client implementations can be programmed to `recognize' and process one or more ALPS profiles. By placing ALPS documents in an available registry, these profiles can be more widely circulated and used as a basis for enabling "serendipitous reuse"<<5,[5]>>.
+
+=== Promoting Reuse
+One role of ALPS registries is to make it easy to locate and refer to shared ALPS profiles. A robust ecosystem of registries is important to increasing the re-use of ALPS profiles. By creating common locations where ALPS documents can be found and referenced makes it more likely those profiles and extensions will be re-used.
+
+=== Single Profile, Mutliple-Use
+An ALPS profile is most useful when is describes a service in a way that supports multiple use. In other words, a description that more than one server can implment without making any changes to the ALPS profile. The more often a single ALPS profile is used in an implementation on the Web, the more valuable that singlie profile becomes. 
+
+=== Distributed Descriptions
+While profile re-use is important, the ALPS registry model is not meant to enforce a single source for all shared ALPS profiles. These guidelines exist to help anyone who wishes to establish and maintain their own ALPS reigstry for whatever reason (See <<establish-registry, Guidelines for Establishing an ALPS Registry>> below).
+
+There are a number of possible reasons for establishing an ALPS registry:
+
+Internal Use::
+  It is possible that some organizations will want to establish their own local ALPS registry for internal use. This is especially valuable during the early design and testing phase of profile documents. 
+
+Specific Topics::  
+  It is also possible that, over time, ALPS registries will be created to support a specific topic or area of study (e.g. astronomy, commerce, social networking, etc.).  
+
+Performance::
+  There may be cases where it makes sense to maintain and ALPS registry in order to reduce network latency or improve performace of the runtime applications. 
+
+[NOTE]
+====
+It should be noted that the resolvable URL of an ALPS profile or extension (which includes the registry in which is it located) is the unqiue identifier for that particular document. Copying ALPS documents from one registry to another is actually creating a _new_ ALPS document; essentially `forking' the existing document. For this reason, copying ALPS documents into multiple registries is discouraged.
+====
+
+For whatever the reason, individuals or organizations are free to establish and maintain there own ALPS registries and are strongly encouraged follow the guidelines spelled out in this document.
+
+== General Guidelines
++++[TK general POV on what registries should do/encourage, etc.]+++
+
+=== Open to All
++++[TK collaborative, sharing, not controlling, always OPTIONAL]+++ 
+
+=== Stability
++++[TK the no-breaking pledge. changes reduce re-use. breakage means new URL. "vnum" is discouraged in the URL]+++
+
+=== Primary Registry
++++[TK commit to a primary registry that will exist at alps.io/registry (or some other location)]+++
+
+=== Additional Registries
++++[TK talk about any other reistries that may already exist and point to the "Establishing..." section below]+++
+
+=== Notational Conventions and Compliance
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC2119<<1,[1]>>.
+
+An ALPS registry is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." All ALPS Registries SHOULD strive to be "unconditionally compliant" implementations (See <<compliance-review, Compliance Review>> below).
+
+== The ALPS Profile Registry
++++[TK intro what a profile is and how it should be handled here.]+++
+
+=== Adding a Profile
++++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
+
+=== Tagging Profiles
++++[TK encourage use of tagging to categorize profiles. not hierarchy, folksonomies references here.]+++
+
+=== Searching for Profiles
++++[TK describe ways to search for profiles (tags, titles, doc contents, etc.]+++
+
+=== Profile Crawling
++++[TK describe possible support for crawlers that might be created to gather ALPS info and publish it in a searchable form. (does this really go here?)]+++
+
+== The ALPS Extension Registry
++++[TK intro what an extension is and how it should be handled here.]+++
+
+=== Adding Extensions
++++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
+
+=== Tagging Extensions
++++[TK encourage use of tagging to categorize profiles. not hierarchy, folksonomies references here.]+++
+
+=== Searching for Extensions
++++[TK describe ways to search for profiles (tags, titles, doc contents, etc.]+++
+
+[[establish-registry]]
+== Guidelines for Establishing An ALPS Registry
++++[TK intro into the notion of creating and maintaining an APR.]+++
+
+=== Announcement
++++[TK announce on the primary list: https://groups.google.com/forum/?fromgroups=#!forum/alps-io]+++
+
+[[compliance-review]]
+=== Compliance Review
++++[TK describe process of requesting review on the primary list, what the review should entail, that reviews are *optional*]+++
+
+=== Contacts and Support
++++[TK the primary newgroup and the website are sources of general contact and support. Each registry SHOULD also create their own modes of support and post on the registry web site.]+++
+
+== References
+
+ * [[0]] 0. Application-Level Profile Semantics http://alps.io/spec/
+ * [[1]] 1. RFC2119 Key words for use in RFCs to Indicate Requirement Levels http://tools.ietf.org/search/rfc2119
+ * [[2]] 2. RFC5988 Web Linking http://tools.ietf.org/search/rfc5988
+ * [[3]] 3. HTML4 Profile Attribute http://www.w3.org/TR/html401/struct/global.html#adef-profile
+ * [[4]] 4. JSON-LD profile paramter http://www.w3.org/TR/json-ld/#application-ld-json
+ * [[5]] 5. Charlton, Stu "Planned and Serendipitous Reuse" http://www.stucharlton.com/blog/archives/000165.html
+
+== Appendix A : Frequently Asked Queestions
++++[TK collect stuff here that deserves response, but doesn't rise to a section in the doc]+++
+
+== Appendix B : Existing Registries
++++[TK should we start with this or keep this a live page?]+++
+  
+
+
