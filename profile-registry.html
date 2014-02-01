@@ -641,29 +641,85 @@ Performance
 </div>
 </div>
 <div class="sect1">
-<h2 id="_general_guidelines">General Guidelines</h2>
+<h2 id="_compliance">Compliance</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>[TK general POV on what registries should do/encourage, etc.]</p></div>
+<div class="paragraph"><p>All ALPS Profile Registries should be maintained in a manner that is consistent with the contents of this document. Each hosted APR should be occasionally reviewed and, as needed, modified in order to stay within the guidelines set out in this document.</p></div>
 <div class="sect2">
-<h3 id="_open_to_all">Open to All</h3>
-<div class="paragraph"><p>[TK collaborative, sharing, not controlling, always OPTIONAL]</p></div>
+<h3 id="_notational_conventions">Notational Conventions</h3>
+<div class="paragraph"><p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC2119<a href="#1">[1]</a>.</p></div>
 </div>
 <div class="sect2">
-<h3 id="_stability">Stability</h3>
-<div class="paragraph"><p>[TK the no-breaking pledge. changes reduce re-use. breakage means new URL. "vnum" is discouraged in the URL]</p></div>
+<h3 id="_compliance_criteria">Compliance Criteria</h3>
+<div class="paragraph"><p>An ALPS registry is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." All ALPS Registries SHOULD strive to be "unconditionally compliant" implementations (See <a href="#compliance-review">Compliance Review</a> below).</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_general_guidelines">General Guidelines</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There are not many constraints on the creation and maintenance of ALPS Profile Registries (APRs). There are, however, some general guidelines (covered below) that should be followed by those who wish to host APRs. They are:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Open to All
+</dt>
+<dd>
+<p>
+  APRs should be open to all. Maintainers should not be &#8216;gatekeepers&#8217; but should instead be enablers for anyone wishing to contribute
+</p>
+</dd>
+<dt class="hdlist1">
+Stable
+</dt>
+<dd>
+<p>
+  It is important that APRs are stable and reliable services. Application developers will grow to rely on the APRs and they deserve the best possible experience.
+</p>
+</dd>
+<dt class="hdlist1">
+Primary Registry
+</dt>
+<dd>
+<p>
+  This document charters the creation of at least one &#8216;primary&#8217; APR and a link to that APR SHOULD appear on the ALPS website.
+</p>
+</dd>
+<dt class="hdlist1">
+Additional Registries
+</dt>
+<dd>
+<p>
+  This document can also be used as a guide for creating additional APRs. There are not restrictions on who can create or host an APR.
+</p>
+</dd>
+</dl></div>
+<div class="sect2">
+<h3 id="_open_to_all">Open to All</h3>
+<div class="paragraph"><p>The aim of ALPS Profile Registries (APRs) is to provide a collaborative repository for sharing profile and extension documents. Since a key goal for the ALPS specification<a href="#0">[0]</a> is to increase "shared understanding" between client and service implementors, an open place where ALPS documents can be shared and referenced is important.</p></div>
+<div class="paragraph"><p>It is also important that the spirit of APRs is one of mutual support. APRs should not become barriers to those who wish to contribute profiles. Those who lead and maintain APR communities should not act as &#8216;gatekeepers&#8217; or as blocking factors for those who want to contribute profiles. To quote David Clark<a href="#6">[6]</a>:</p></div>
+<div class="quoteblock">
+<div class="content">
+<div class="paragraph"><p>We reject: kings, presidents and voting.</p></div>
+<div class="paragraph"><p>We believe in: rough consensus and running code.<a href="#7">[7]</a></p></div>
+</div>
+<div class="attribution">
+<em>Proceedings of the Twenty-Fourth Internet Engineering Task Force - 1992</em><br />
+&#8212; David D. Clark
+</div></div>
+<div class="paragraph"><p>It is also important to remember that registering profiles and extensions in APRs is RECOMMENDED, but NOT REQUIRED. There may base cases where profiles will be used, but not shared. While this is not within the spirit of ALPS in general, that&#8217;s OK.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_stable">Stable</h3>
+<div class="paragraph"><p>It is also important that APRs are stable, reliable. Those hosting and maintaining profiles and extensions take on the responsibilty to maintain a service that is both available and responsive. APR maintainers should take all necessary steps to keep their service up and running.</p></div>
+<div class="paragraph"><p>They should also work to reduce the chance of "breakage" for existing profiles and extensions. That means APRs should make it &#8216;hard&#8217; for authors to modify registered profiles and extensions in ways that will introduce backware incompatibilities. It is RECOMMENDED that maintainers institute review processes that reduce breakage and encourage profile and extension authors to keep this uppermost in mind when creating and updating their ALPS documents.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_primary_registry">Primary Registry</h3>
-<div class="paragraph"><p>[TK commit to a primary registry that will exist at alps.io/registry (or some other location)]</p></div>
+<div class="paragraph"><p>This document is a a charter to create at least one &#8216;primary&#8217; APR to hold as many avaialble profile and extension documents as possible. A link to this primary registry SHOULD appear on the ALPS website (<a href="http://alps.io">http://alps.io</a>). The role of this primary registry is to act as a place where the spirit of ALPS and the guidelines listed here are promoted and protected. It can also act as a place where those interested in learning more about ALPS and find helpful material and an opportunity to participate in the maintenance of the APR.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_additional_registries">Additional Registries</h3>
-<div class="paragraph"><p>[TK talk about any other reistries that may already exist and point to the "Establishing..." section below]</p></div>
-</div>
-<div class="sect2">
-<h3 id="_notational_conventions_and_compliance">Notational Conventions and Compliance</h3>
-<div class="paragraph"><p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC2119<a href="#1">[1]</a>.</p></div>
-<div class="paragraph"><p>An ALPS registry is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." All ALPS Registries SHOULD strive to be "unconditionally compliant" implementations (See <a href="#compliance-review">Compliance Review</a> below).</p></div>
+<div class="paragraph"><p>This document is also meant to be a guide to those who with to start their own ALPS Profile Repositories. There is not limit to the number of APRs that may exist. There are no special qualifications needed for those willing to host a repository and there are not permissions needed in order to do so.</p></div>
+<div class="paragraph"><p>However, once an APR is created, those hosting it have a responsbility to continue to maintain it in a responsible and reliable manner. Since it is possible that developers will rely in the APR to serve up ALPS documents in order to keep their applications running properly, APR maintainers have a duty to continue to respond to ALPS document requests well into the future. See <a href="#establish-registry">Guidelines for Establishing An ALPS Registry</a> for details on the proper creation and maintenance of APRs.</p></div>
 </div>
 </div>
 </div>
@@ -759,6 +815,16 @@ Performance
 <a id="5"></a> 5. Charlton, Stu "Planned and Serendipitous Reuse" <a href="http://www.stucharlton.com/blog/archives/000165.html">http://www.stucharlton.com/blog/archives/000165.html</a>
 </p>
 </li>
+<li>
+<p>
+<a id="6"></a> 6. Wikipedia, "David D. Clark", <a href="http://en.wikipedia.org/wiki/David_D._Clark">http://en.wikipedia.org/wiki/David_D._Clark</a>
+</p>
+</li>
+<li>
+<p>
+<a id="7"></a> 7. IETF Proceedings, "Proceedings of the Twenty-Fourth Internet Engineering Task Force" <a href="http://www.ietf.org/old/2009/proceedings/prior29/IETF24.pdf">http://www.ietf.org/old/2009/proceedings/prior29/IETF24.pdf</a>
+</p>
+</li>
 </ul></div>
 </div>
 </div>
@@ -778,7 +844,7 @@ Performance
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-01-29 22:32:47 EST
+Last updated 2014-01-31 23:46:39 EST
 </div>
 </div>
 </body>
