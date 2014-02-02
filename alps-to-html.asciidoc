@@ -3,7 +3,7 @@ ALPS Mapping Guidelines for HTML
 :author: Mike Amundsen
 :email: mca@mamund.com
 :corpname: CA / Layer 7
-:revdate: January 27, 2014
+:revdate: February 1, 2014
 
 == Summary
 This document provides guidance on mapping ALPS descriptions to HTML representations. It is provided as a guide for those writing servers that will use ALPS profiles to generate HTML and for those writing client applications that will use ALPS profiles to "recognize" ALPS descriptors within the HTML document.
