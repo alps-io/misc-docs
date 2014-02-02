@@ -93,29 +93,23 @@ However, once an APR is created, those hosting it have a responsbility to contin
 == The ALPS Profile Registry
 +++[TK intro what a profile is and how it should be handled here.]+++
 
-=== Adding a Profile
+=== Adding a ALPS Documents
 +++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
 
-=== Tagging Profiles
+==== Adding Profile Documents
++++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
+
+=== Adding Extension Documents
++++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
+
+=== Tagging ALPS Documents
 +++[TK encourage use of tagging to categorize profiles. not hierarchy, folksonomies references here.]+++
 
-=== Searching for Profiles
+=== Searching ALPS Documents
 +++[TK describe ways to search for profiles (tags, titles, doc contents, etc.]+++
 
-=== Profile Crawling
+=== Crawling for ALPS Documents
 +++[TK describe possible support for crawlers that might be created to gather ALPS info and publish it in a searchable form. (does this really go here?)]+++
-
-== The ALPS Extension Registry
-+++[TK intro what an extension is and how it should be handled here.]+++
-
-=== Adding Extensions
-+++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
-
-=== Tagging Extensions
-+++[TK encourage use of tagging to categorize profiles. not hierarchy, folksonomies references here.]+++
-
-=== Searching for Extensions
-+++[TK describe ways to search for profiles (tags, titles, doc contents, etc.]+++
 
 [[establish-registry]]
 == Guidelines for Establishing An ALPS Registry
