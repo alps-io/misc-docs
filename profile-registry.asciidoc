@@ -93,7 +93,7 @@ However, once an APR is created, those hosting it have a responsbility to contin
 == The ALPS Profile Registry
 +++[TK intro what a profile is and how it should be handled here.]+++
 
-=== Adding a ALPS Documents
+=== Adding ALPS Documents
 +++[TK describe typical process for adding including data to collect, data to reflect, and support for both XML and JSON representations]+++
 
 ==== Adding Profile Documents
