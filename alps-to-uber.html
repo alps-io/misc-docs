@@ -1,0 +1,1003 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>ALPS Mapping Guidelines for UBER</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>ALPS Mapping Guidelines for UBER</h1>
+<span id="author">Mike Amundsen</span><br />
+<span id="email"><code>&lt;<a href="mailto:mca@mamund.com">mca@mamund.com</a>&gt;</code></span><br />
+<span id="revdate">July 10, 2015</span>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_summary">Summary</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This document provides guidance on mapping ALPS descriptions to <a href="#UBER">[UBER]</a> representations. It is provided as a guide for those writing servers that will use ALPS profiles to generate UBER documents and for those writing client applications that will use ALPS profiles to "recognize" ALPS descriptors within the UBER document.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_review_of_alps_principles">A Review of ALPS Principles</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The Application-Level Profile Semantic<a href="#ALPS">[ALPS]</a> specification is designed to describe the data elements and state transitions that make up a <em>problem domain</em> (e.g. microblogging, accounting, etc.). ALPS documents are designed to be useful to both client and server implementors and can be used at both run-time and design-time to handle the generation and interpretation of response representations. ALPS description documents are referred to as <em>profiles</em> or <em>profile documents</em>.</p></div>
+<div class="paragraph"><p>Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime <em>behavior</em> of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profliesin order to create an actual instance of a service or client application.</p></div>
+<div class="sect2">
+<h3 id="_servers_and_clients">Servers and Clients</h3>
+<div class="paragraph"><p>For server implementors, ALPS profiles establish the list of possible identifiers for data values (<code>givenName</code>, <code>familyName</code>, etc.) and transitions (<code>publish</code>, <code>createUser</code>, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is <em>safe</em> or <em>idempotent</em> and, in some cases, whether there are any possible arguments that can be passed with each transition.</p></div>
+<div class="paragraph"><p>For client implementors can use the same ALPS document to as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recongize all the important data elements and state transitions emitted by that service.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advertising_alps_profiles_for_uber_representations">Advertising ALPS Profiles for UBER Representations</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Servers returning UBER responses can advertise the ALPS profiles they support using the guidelines in the <a href="#UBER">[UBER]</a> specification.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_mapping_rules_for_alps_to_uber">Basic Mapping Rules for ALPS to UBER</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following are the basic rules for rendering ALPS profile information into valid UBER representations.</p></div>
+<div class="sect2">
+<h3 id="_the_alps_code_descriptor_id_code_property">The ALPS <code>descriptor.id</code> property</h3>
+<div class="paragraph"><p>The <code>ALPS.descriptor.id</code> SHOULD be transformed into an UBER <code>id</code> property. Below are valid examples:</p></div>
+<div class="listingblock">
+<div class="title">Applying <code>descriptor.id</code> to UBER elements</div>
+<div class="content">
+<pre><code>&lt;!-- ALPS document --&gt;
+&lt;descriptor id="abc" ... /&gt;
+
+&lt;!-- UBER data elements --&gt;
+&lt;data id="abc" ... /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>(TK: ALPS has no cardinality so in an ALPS doc, there may be a single element w/ a unique ID [<code>&lt;descriptor id="item" &#8230; /&gt;</code>] but in the UBER document, there may be many elements with the same ID [<code>&lt;data id="&#8230;" name="item" &#8230; /&gt;&lt;data id="&#8230;" name="item" &#8230; /&gt;</code>]. This needs to be sorted.&#8201;&#8212;&#8201;mca).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_the_alps_code_descriptor_name_code_property">The ALPS <code>descriptor.name</code> property</h3>
+<div class="paragraph"><p>The <code>ALPS.descriptor.name</code> SHOULD be transformed into an UBER <code>name</code> property. Below are valid examples:</p></div>
+<div class="listingblock">
+<div class="title">Applying <code>descriptor.name</code> to UBER elements</div>
+<div class="content">
+<pre><code>&lt;!-- ALPS document --&gt;
+&lt;descriptor id="abc" name="xyz" ... /&gt;
+&lt;descriptor id="efg" name="xyz" ... /&gt;
+
+&lt;!-- UBER data elements --&gt;
+&lt;data id="abc" name="xyz" ... /&gt;
+&lt;data id="efg" name="xyz" ... /&gt;</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_the_alps_code_descriptor_type_code_property">The ALPS <code>descriptor.type</code> property</h3>
+<div class="paragraph"><p>The <code>descriptor.type</code> value is used to determine whether the element should be rendered as a &#8216;value&#8217; (<code>descriptor.type="semantic"</code>) element or a &#8216;transition&#8217; element (<code>descriptor.type="safe|unsafe|idempotent"</code>). Below is a table showing the various possibilities:</p></div>
+<div class="tableblock">
+<table rules="rows"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="30%" />
+<col width="70%" />
+<thead>
+<tr>
+<th align="left" valign="top"><code>descriptor.type</code> Value</th>
+<th align="left" valign="top">UBER DATA Element</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">safe</p></td>
+<td align="left" valign="top"><p class="table"><code>&lt;data action="read" &#8230; /&gt;</code> OR <code>{"data" : {"action" : "read" &#8230; }}</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">unsafe</p></td>
+<td align="left" valign="top"><p class="table"><code>&lt;data action="append|partial" &#8230; /&gt;</code> OR <code>{"data" : {"action" : "append|partial" &#8230; }}</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">idempotent</p></td>
+<td align="left" valign="top"><p class="table"><code>&lt;data action="replace|remove" &#8230; /&gt;</code> OR <code>{"data" : {"action" : "replace|remove" &#8230; }}</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">semantic</p></td>
+<td align="left" valign="top"><p class="table"><code>&lt;data &#8230; /&gt;</code> OR <code>{"data" : { &#8230;}}</code><sup>1</sup></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+In UBER, any element that does not have an <code>action</code> property is considered a &#8216;value&#8217; element.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mapping_examples">Mapping Examples</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Below are some examples to use as guides when mapping between ALPS and UBER.</p></div>
+<div class="sect2">
+<h3 id="_search_example">Search Example</h3>
+<div class="paragraph"><p>This is a very simple ALPS profile that defines a single semantic descriptor ("text") and a single safe descriptor ("search"). This profile describes the essence of the front end of any simple web-based search engine. Mapping this ALPS profile to an HTML4 document is rather straight-forward.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt;!-- ALPS Profile --&gt;
+&lt;alps&gt;
+  &lt;link rel="self" href="http://alps.io/profiles/search" /&gt; <b>&lt;1&gt;</b>
+  &lt;descriptor id="text" type="semantic"&gt; <b>&lt;2&gt;</b>
+  &lt;descriptor id="search" type="safe"&gt; <b>&lt;3&gt;</b>
+&lt;/alps&gt;
+
+&lt;!-- UBER Representation --&gt;
+&lt;uber&gt;
+  &lt;data rel="profile" url="http://alps.io/profiles/search"&gt; <b>&lt;1&gt;</b>
+  &lt;data&gt;
+    &lt;data id="search" url="..." action="safe"&gt; <b>&lt;3&gt;</b>
+      &lt;data id="text" value="" /&gt; <b>&lt;2&gt;</b>
+    &lt;/data&gt;
+  &lt;/data&gt;
+&lt;/uber&gt;</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_user_account_example">User Account Example</h3>
+<div class="paragraph"><p>This example shows an ALPS profile that describes both reading and writing operations on a user account. It is also structured as a &#8216;flat&#8217; ALPS document. The data elements (&lt;2&gt;) are listed separately from the transition elements (&lt;3&gt;). The profile does not constrain any server implementations to specific parameters for transitions; each server can select the data elements that best fit that server&#8217;s use cases.</p></div>
+<div class="listingblock">
+<div class="title">ALPS User Account Profile</div>
+<div class="content">
+<pre><code>&lt;alps&gt;
+  &lt;link rel="self" href="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+
+  &lt;!-- data elements --&gt; <b>&lt;2&gt;</b>
+  &lt;descriptor id="user" type="semantic" /&gt;
+  &lt;descriptor id="accessCode" type="semantic" /&gt;
+  &lt;descriptor id="givenName" type="semantic" /&gt;
+  &lt;descriptor id="familyName" type="semantic" /&gt;
+  &lt;descriptor id="email" type="semantic" /&gt;
+  &lt;descriptor id="telephone" type="semantic" /&gt;
+
+  &lt;!-- transitions --&gt; <b>&lt;3&gt;</b>
+  &lt;descriptor id="list" type="safe" /&gt; <b>&lt;4&gt;</b>
+  &lt;descriptor id="detail" type="safe" /&gt; <b>&lt;5&gt;</b>
+  &lt;descriptor id="login-link" type="safe" name="login" /&gt; <b>&lt;6&gt;</b>
+  &lt;descriptor id="login-form" type="unsafe" name="login" /&gt; <b>&lt;7&gt;</b>
+  &lt;descriptor id="create-link" type="safe" name="create"/&gt; <b>&lt;7&gt;</b>
+  &lt;descriptor id="create-form" type="unsafe" "name="create/&gt; <b>&lt;8&gt;</b>
+  &lt;descriptor id="update-link" type="safe" name="update"/&gt; <b>&lt;9&gt;</b>
+  &lt;descriptor id="update-form" type="idempotent" name="update" /&gt; <b>&lt;10&gt;</b>
+  &lt;descriptor id="remove-link" type="safe" name="remove" /&gt; <b>&lt;11&gt;</b>
+  &lt;descriptor id="remove-form" type="idempotent" name="remove" /&gt; <b>&lt;12&gt;</b>
+
+&lt;/alps&gt;</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">UBER Representation of a list of users (with link to login and creating new accounts)</div>
+<div class="content">
+<pre><code>&lt;uber&gt;
+  &lt;data rel="profile" url="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+  &lt;data id="body"&gt;
+    &lt;data id="title" value="User List" /&gt;
+
+    &lt;data id="menu" value="Menu"&gt;
+      &lt;data id="list" rel="collection" url="..." value="Refresh List/&gt; <b>&lt;4&gt;</b>
+      &lt;data id="login-link" name="login" url="..." rel="http://example.org/rels/login"  value="Login" /&gt; <b>&lt;6&gt;</b>
+      &lt;data id="create-link" name="create url="..." rel="create-form" value="Create Account" /&gt; <b>&lt;7&gt;</b>
+    &lt;/data&gt;
+
+    &lt;data id="current-user" value="Currrent Users" /&gt;
+      &lt;data url="..." rel="item" name="detail" value="Mary" /&gt; <b>&lt;5&gt;</b>
+      &lt;data url="..." rel="item" name="detail" value="Mark" /&gt; <b>&lt;5&gt;</b>
+      &lt;data url="..." rel="item" name="detail" value="Mandy" /&gt; <b>&lt;5&gt;</b>
+      &lt;data url="..." rel="item" name="detail" value="Manfred" /&gt; <b>&lt;5&gt;</b>
+      &lt;data url="..." rel="item" name="detail" value="Michelle" /&gt; <b>&lt;5&gt;</b>
+      &lt;data url="..." rel="item" name="detail" value="Michael" /&gt; <b>&lt;5&gt;</b>
+  &lt;/data&gt;
+&lt;/uber&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>In the above UBER example, the Menu section shows the use of the <code>login-link</code> and <code>create-link</code> ALPS decriptors applied to <code>UBER.data</code> elements that use both the associated <code>ALPS.descriptor.id</code> and <code>ALPS.descriptor.name</code> values. Also note that the <code>ALPS.descriptor.id="name"</code> element appears multiple times in the UBER representation. When a unique element in the ALPS document appears multiple times in the UBER document, the <code>ALPS.descriptor.id</code> value is translated to the <code>UBER.data.name</code> value.</p></div>
+<div class="paragraph"><p>The following HTML5 representation is an example of what might be returned when a client application activates the <code>login-link</code>:</p></div>
+<div class="listingblock">
+<div class="title">UBER Representation for creating a new user account.</div>
+<div class="content">
+<pre><code>&lt;uber&gt;
+  &lt;data rel="profile" url="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+  &lt;data id="body"&gt;
+    &lt;data id="title" value="Create Account" /&gt;
+    &lt;data id="create-form" name="create" action="append" url="..."&gt; <b>&lt;8&gt;</b>
+      &lt;data id="user" label="User Name" value="" /&gt;
+      &lt;data id="givenName" label="First Name" value="" /&gt;
+      &lt;data id="familyName" label="Last Name" value="" /&gt;
+      &lt;data id="email" label="Email" value="" /&gt;
+      &lt;data id="telephone" label="SMS" value="" /&gt;
+    &lt;/data&gt;
+  &lt;/data&gt;
+&lt;/html&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>What follows is an UBER response that might be returned when activating a <code>detail</code> link:</p></div>
+<div class="listingblock">
+<div class="title">UBER Representation for updating an existing user account.</div>
+<div class="content">
+<pre><code>&lt;uber&gt;
+  &lt;data rel="profile" url="http://alps.io/profiles/useraccount" /&gt; <b>&lt;1&gt;</b>
+  &lt;data id="body"&gt;
+    &lt;data id="title" value="Update Account" /&gt;
+    &lt;data id="update-form" name="update" action="replace" url="..."&gt; <b>&lt;10&gt;</b>
+      &lt;data id="user" label="User Name" value="mamund" /&gt;
+      &lt;data id="givenName" label="First Name" value="Mike" /&gt;
+      &lt;data id="familyName" label="Last Name" value="Amundsen" /&gt;
+      &lt;data id="email" label="Email" value="mike@example.org" /&gt;
+      &lt;data id="telephone" label="SMS" value="123-456-7890" /&gt;
+    &lt;/data&gt;
+  &lt;/data&gt;
+&lt;/uber&gt;</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">UBER Representation for removing an existing user account.</div>
+<div class="content">
+<pre><code>&lt;uber&gt;
+  &lt;data rel="profile" url="http://alps.io/profiles/useraccount"&gt; <b>&lt;1&gt;</b>
+  &lt;data id="body"&gt;
+    &lt;data id="title" value="Remove Account" /&gt;
+    &lt;data id="remove-form" name="remove" action="remove" url="..."&gt; <b>&lt;12&gt;</b>
+  &lt;/data&gt;
+&lt;/uber&gt;</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a id="ALPS"></a> <a href="http://alps.io/spec">http://alps.io/spec</a>
+</p>
+</li>
+<li>
+<p>
+<a id="UBER"></a> <a href="http://uberhypermedia.com">http://uberhypermedia.com</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2015-07-10 18:43:31 EDT
+</div>
+</div>
+</body>
+</html>

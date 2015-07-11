@@ -1,0 +1,204 @@
+ALPS Mapping Guidelines for UBER
+================================
+:author: Mike Amundsen
+:email: mca@mamund.com
+:corpname: CA / Layer 7
+:revdate: July 10, 2015
+
+== Summary
+This document provides guidance on mapping ALPS descriptions to <<UBER,[UBER]>> representations. It is provided as a guide for those writing servers that will use ALPS profiles to generate UBER documents and for those writing client applications that will use ALPS profiles to "recognize" ALPS descriptors within the UBER document.
+
+== A Review of ALPS Principles
+The Application-Level Profile Semantic<<ALPS,[ALPS]>> specification is designed to describe the data elements and state transitions that make up a 'problem domain' (e.g. microblogging, accounting, etc.). ALPS documents are designed to be useful to both client and server implementors and can be used at both run-time and design-time to handle the generation and interpretation of response representations. ALPS description documents are referred to as 'profiles' or 'profile documents'.
+
+Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime 'behavior' of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profliesin order to create an actual instance of a service or client application.
+
+=== Servers and Clients
+For server implementors, ALPS profiles establish the list of possible identifiers for data values (+givenName+, +familyName+, etc.) and transitions (+publish+, +createUser+, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is 'safe' or 'idempotent' and, in some cases, whether there are any possible arguments that can be passed with each transition. 
+
+For client implementors can use the same ALPS document to as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recongize all the important data elements and state transitions emitted by that service.
+
+== Advertising ALPS Profiles for UBER Representations
+Servers returning UBER responses can advertise the ALPS profiles they support using the guidelines in the <<UBER,[UBER]>> specification.
+
+== Basic Mapping Rules for ALPS to UBER
+The following are the basic rules for rendering ALPS profile information into valid UBER representations.
+
+=== The ALPS +descriptor.id+ property
+The +ALPS.descriptor.id+ SHOULD be transformed into an UBER +id+ property. Below are valid examples:
+
+.Applying +descriptor.id+ to UBER elements
+----
+<!-- ALPS document -->
+<descriptor id="abc" ... />
+
+<!-- UBER data elements -->
+<data id="abc" ... />
+----
+
+(TK: ALPS has no cardinality so in an ALPS doc, there may be a single element w/ a unique ID [+<descriptor id="item" ... />+] but in the UBER document, there may be many elements with the same ID [+<data id="..." name="item" ... /><data id="..." name="item" ... />+]. This needs to be sorted. -- mca).
+ 
+=== The ALPS +descriptor.name+ property
+The +ALPS.descriptor.name+ SHOULD be transformed into an UBER +name+ property. Below are valid examples:
+
+.Applying +descriptor.name+ to UBER elements
+----
+<!-- ALPS document -->
+<descriptor id="abc" name="xyz" ... />
+<descriptor id="efg" name="xyz" ... />
+
+<!-- UBER data elements -->
+<data id="abc" name="xyz" ... />
+<data id="efg" name="xyz" ... />
+----
+
+=== The ALPS +descriptor.type+ property
+The +descriptor.type+ value is used to determine whether the element should be rendered as a `value' (+descriptor.type="semantic"+) element or a `transition' element (+descriptor.type="safe|unsafe|idempotent"+). Below is a table showing the various possibilities:
+
+[grid="rows",format="csv"]
+[options="header", cols="3,7"]
+|=============================
++descriptor.type+ Value, UBER DATA Element
+"safe",+<data action="read" ... />+ OR +{"data" : {"action" : "read" ... }}+
+"unsafe", +<data action="append|partial" ... />+ OR +{"data" : {"action" : "append|partial" ... }}+
+"idempotent", +<data action="replace|remove" ... />+ OR +{"data" : {"action" : "replace|remove" ... }}+
+"semantic",+<data ... />+ OR +{"data" : { ...}}+^1^
+|===============================
+1. In UBER, any element that does not have an +action+ property is considered a `value' element.
+
+== Mapping Examples
+Below are some examples to use as guides when mapping between ALPS and UBER.
+
+=== Search Example
+This is a very simple ALPS profile that defines a single semantic descriptor ("text") and a single safe descriptor ("search"). This profile describes the essence of the front end of any simple web-based search engine. Mapping this ALPS profile to an HTML4 document is rather straight-forward.
+
+----
+<!-- ALPS Profile -->
+<alps>
+  <link rel="self" href="http://alps.io/profiles/search" /> <1>
+  <descriptor id="text" type="semantic"> <2>
+  <descriptor id="search" type="safe"> <3>
+</alps>
+
+<!-- UBER Representation -->
+<uber>
+  <data rel="profile" url="http://alps.io/profiles/search"> <1>
+  <data>
+    <data id="search" url="..." action="safe"> <3>
+      <data id="text" value="" /> <2>
+    </data>
+  </data>
+</uber>
+----
+
+=== User Account Example
+This example shows an ALPS profile that describes both reading and writing operations on a user account. It is also structured as a `flat' ALPS document. The data elements (<2>) are listed separately from the transition elements (<3>). The profile does not constrain any server implementations to specific parameters for transitions; each server can select the data elements that best fit that server's use cases.
+
+.ALPS User Account Profile
+----
+<alps>
+  <link rel="self" href="http://alps.io/profiles/useraccount" /> <1>
+  
+  <!-- data elements --> <2>
+  <descriptor id="user" type="semantic" />
+  <descriptor id="accessCode" type="semantic" />
+  <descriptor id="givenName" type="semantic" />
+  <descriptor id="familyName" type="semantic" />
+  <descriptor id="email" type="semantic" />
+  <descriptor id="telephone" type="semantic" />
+  
+  <!-- transitions --> <3>
+  <descriptor id="list" type="safe" /> <4>
+  <descriptor id="detail" type="safe" /> <5>
+  <descriptor id="login-link" type="safe" name="login" /> <6>
+  <descriptor id="login-form" type="unsafe" name="login" /> <7>
+  <descriptor id="create-link" type="safe" name="create"/> <7>
+  <descriptor id="create-form" type="unsafe" "name="create/> <8>
+  <descriptor id="update-link" type="safe" name="update"/> <9>
+  <descriptor id="update-form" type="idempotent" name="update" /> <10>
+  <descriptor id="remove-link" type="safe" name="remove" /> <11>
+  <descriptor id="remove-form" type="idempotent" name="remove" /> <12>
+  
+</alps>
+----
+
+.UBER Representation of a list of users (with link to login and creating new accounts)
+----
+<uber>
+  <data rel="profile" url="http://alps.io/profiles/useraccount" /> <1>
+  <data id="body">
+    <data id="title" value="User List" />
+    
+    <data id="menu" value="Menu">
+      <data id="list" rel="collection" url="..." value="Refresh List/> <4>
+      <data id="login-link" name="login" url="..." rel="http://example.org/rels/login"  value="Login" /> <6>
+      <data id="create-link" name="create url="..." rel="create-form" value="Create Account" /> <7>
+    </data>
+        
+    <data id="current-user" value="Currrent Users" />
+      <data url="..." rel="item" name="detail" value="Mary" /> <5>
+      <data url="..." rel="item" name="detail" value="Mark" /> <5>
+      <data url="..." rel="item" name="detail" value="Mandy" /> <5>
+      <data url="..." rel="item" name="detail" value="Manfred" /> <5>
+      <data url="..." rel="item" name="detail" value="Michelle" /> <5>
+      <data url="..." rel="item" name="detail" value="Michael" /> <5>
+  </data>
+</uber>
+----
+In the above UBER example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS decriptors applied to +UBER.data+ elements that use both the associated +ALPS.descriptor.id+ and +ALPS.descriptor.name+ values. Also note that the +ALPS.descriptor.id="name"+ element appears multiple times in the UBER representation. When a unique element in the ALPS document appears multiple times in the UBER document, the +ALPS.descriptor.id+ value is translated to the +UBER.data.name+ value.
+
+The following HTML5 representation is an example of what might be returned when a client application activates the +login-link+:
+      
+.UBER Representation for creating a new user account.
+----
+<uber>
+  <data rel="profile" url="http://alps.io/profiles/useraccount" /> <1>
+  <data id="body">
+    <data id="title" value="Create Account" />
+    <data id="create-form" name="create" action="append" url="..."> <8>
+      <data id="user" label="User Name" value="" />
+      <data id="givenName" label="First Name" value="" />
+      <data id="familyName" label="Last Name" value="" />
+      <data id="email" label="Email" value="" />
+      <data id="telephone" label="SMS" value="" />
+    </data>
+  </data>
+</html>
+----
+
+What follows is an UBER response that might be returned when activating a +detail+ link:
+
+.UBER Representation for updating an existing user account.
+----
+<uber>
+  <data rel="profile" url="http://alps.io/profiles/useraccount" /> <1>
+  <data id="body">
+    <data id="title" value="Update Account" />
+    <data id="update-form" name="update" action="replace" url="..."> <10>
+      <data id="user" label="User Name" value="mamund" />
+      <data id="givenName" label="First Name" value="Mike" />
+      <data id="familyName" label="Last Name" value="Amundsen" />
+      <data id="email" label="Email" value="mike@example.org" />
+      <data id="telephone" label="SMS" value="123-456-7890" />
+    </data>
+  </data>
+</uber>
+----
+
+.UBER Representation for removing an existing user account.
+----
+<uber>
+  <data rel="profile" url="http://alps.io/profiles/useraccount"> <1>
+  <data id="body">
+    <data id="title" value="Remove Account" />
+    <data id="remove-form" name="remove" action="remove" url="..."> <12>
+  </data>
+</uber>
+----
+
+== References
+
+ * [[ALPS]] http://alps.io/spec
+ * [[UBER]] http://uberhypermedia.com
+
+
