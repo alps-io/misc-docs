@@ -783,7 +783,34 @@ asciidoc.install(2);
 &lt;!-- UBER data elements --&gt;
 &lt;data id="abc" ... /&gt;</code></pre>
 </div></div>
-<div class="paragraph"><p>(TK: ALPS has no cardinality so in an ALPS doc, there may be a single element w/ a unique ID [<code>&lt;descriptor id="item" &#8230; /&gt;</code>] but in the UBER document, there may be many elements with the same ID [<code>&lt;data id="&#8230;" name="item" &#8230; /&gt;&lt;data id="&#8230;" name="item" &#8230; /&gt;</code>]. This needs to be sorted.&#8201;&#8212;&#8201;mca).</p></div>
+<div class="sect3">
+<h4 id="_unique_alps_code_descriptor_id_code_results_in_multiple_non_unique_uber_elements">Unique ALPS <code>descriptor.id</code> Results in Multiple Non-Unique UBER elements</h4>
+<div class="paragraph"><p>There may be instances when the ALPS document contains a unique element that will result in several instances of that element in the runtime representation. When this happens, the <code>ALPS.descriptor.name</code> property SHOULD be used as the <code>UBER.data.name</code> value. If the ALPS element has no <code>name</code> property, the <code>ALPS.descriptor.id</code> value SHOULD be used as the <code>UBER.data.name</code> value. See the following example:</p></div>
+<div class="listingblock">
+<div class="title">Handling unique ALPS <code>descriptor.id</code> that results in multiple instances in UBER documents</div>
+<div class="content">
+<pre><code>&lt;!-- ALPS document --&gt;
+&lt;descriptor id="item" type="safe" /&gt;
+&lt;descriptor id="customer-link" name="customer" type="safe" /&gt;
+
+&lt;!-- UBER data elements --&gt;
+&lt;data id="item-list"&gt;
+  &lt;data name="item" action="read" url="..." /&gt;
+  &lt;data name="item" action="read" url="..." /&gt;
+  &lt;data name="item" action="read" url="..." /&gt;
+  &lt;data name="item" action="read" url="..." /&gt;
+  ...
+&lt;/data&gt;
+
+&lt;data id="customers"&gt;
+  &lt;data name="customer" action="read" url="..." /&gt;
+  &lt;data name="customer" action="read" url="..." /&gt;
+  &lt;data name="customer" action="read" url="..." /&gt;
+  &lt;data name="customer" action="read" url="..." /&gt;
+  ...
+&lt;/data&gt;</code></pre>
+</div></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_the_alps_code_descriptor_name_code_property">The ALPS <code>descriptor.name</code> property</h3>
@@ -1000,7 +1027,7 @@ In UBER, any element that does not have an <code>action</code> property is consi
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-10 20:21:39 EDT
+Last updated 2015-07-10 21:59:56 EDT
 </div>
 </div>
 </body>

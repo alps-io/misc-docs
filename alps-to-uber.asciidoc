@@ -37,7 +37,32 @@ The +ALPS.descriptor.id+ SHOULD be transformed into an UBER +id+ property. Below
 <data id="abc" ... />
 ----
 
-(TK: ALPS has no cardinality so in an ALPS doc, there may be a single element w/ a unique ID [+<descriptor id="item" ... />+] but in the UBER document, there may be many elements with the same ID [+<data id="..." name="item" ... /><data id="..." name="item" ... />+]. This needs to be sorted. -- mca).
+==== Unique ALPS +descriptor.id+ Results in Multiple Non-Unique UBER elements
+There may be instances when the ALPS document contains a unique element that will result in several instances of that element in the runtime representation. When this happens, the +ALPS.descriptor.name+ property SHOULD be used as the +UBER.data.name+ value. If the ALPS element has no +name+ property, the +ALPS.descriptor.id+ value SHOULD be used as the +UBER.data.name+ value. See the following example:
+
+.Handling unique ALPS +descriptor.id+ that results in multiple instances in UBER documents
+----
+<!-- ALPS document -->
+<descriptor id="item" type="safe" />
+<descriptor id="customer-link" name="customer" type="safe" />
+
+<!-- UBER data elements -->
+<data id="item-list">
+  <data name="item" action="read" url="..." />
+  <data name="item" action="read" url="..." />
+  <data name="item" action="read" url="..." />
+  <data name="item" action="read" url="..." />
+  ...
+</data>
+
+<data id="customers">
+  <data name="customer" action="read" url="..." />
+  <data name="customer" action="read" url="..." />
+  <data name="customer" action="read" url="..." />
+  <data name="customer" action="read" url="..." />
+  ...
+</data>
+----
  
 === The ALPS +descriptor.name+ property
 The +ALPS.descriptor.name+ SHOULD be transformed into an UBER +name+ property. Below are valid examples:
