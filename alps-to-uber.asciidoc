@@ -12,12 +12,12 @@ This document provides guidance on mapping ALPS descriptions to <<UBER,[UBER]>> 
 == A Review of ALPS Principles
 The Application-Level Profile Semantic<<ALPS,[ALPS]>> specification is designed to describe the data elements and state transitions that make up a 'problem domain' (e.g. microblogging, accounting, etc.). ALPS documents are designed to be useful to both client and server implementors and can be used at both run-time and design-time to handle the generation and interpretation of response representations. ALPS description documents are referred to as 'profiles' or 'profile documents'.
 
-Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime 'behavior' of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profliesin order to create an actual instance of a service or client application.
+Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime 'behavior' of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profiles in order to create an actual instance of a service or client application.
 
 === Servers and Clients
-For server implementors, ALPS profiles establish the list of possible identifiers for data values (+givenName+, +familyName+, etc.) and transitions (+publish+, +createUser+, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is 'safe' or 'idempotent' and, in some cases, whether there are any possible arguments that can be passed with each transition. 
+For server implementors, ALPS profiles establish the list of possible identifiers for data values (+givenName+, +familyName+, etc.) and transitions (+publish+, +createUser+, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is 'safe' or 'idempotent' and, in some cases, whether there are any possible arguments that can be passed with each transition.
 
-For client implementors can use the same ALPS document to as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recongize all the important data elements and state transitions emitted by that service.
+Client implementors may also use the same ALPS document as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recognize all the important data elements and state transitions emitted by that service.
 
 == Advertising ALPS Profiles for UBER Representations
 Servers returning UBER responses can advertise the ALPS profiles they support using the guidelines in the <<UBER,[UBER]>> specification.
@@ -63,7 +63,7 @@ There may be instances when the ALPS document contains a unique element that wil
   ...
 </data>
 ----
- 
+
 === The ALPS +descriptor.name+ property
 The +ALPS.descriptor.name+ SHOULD be transformed into an UBER +name+ property. Below are valid examples:
 
@@ -124,7 +124,7 @@ This example shows an ALPS profile that describes both reading and writing opera
 ----
 <alps>
   <link rel="self" href="http://alps.io/profiles/useraccount" /> <1>
-  
+
   <!-- data elements --> <2>
   <descriptor id="user" type="semantic" />
   <descriptor id="accessCode" type="semantic" />
@@ -132,7 +132,7 @@ This example shows an ALPS profile that describes both reading and writing opera
   <descriptor id="familyName" type="semantic" />
   <descriptor id="email" type="semantic" />
   <descriptor id="telephone" type="semantic" />
-  
+
   <!-- transitions --> <3>
   <descriptor id="list" type="safe" /> <4>
   <descriptor id="detail" type="safe" /> <5>
@@ -144,7 +144,7 @@ This example shows an ALPS profile that describes both reading and writing opera
   <descriptor id="update-form" type="idempotent" name="update" /> <10>
   <descriptor id="remove-link" type="safe" name="remove" /> <11>
   <descriptor id="remove-form" type="idempotent" name="remove" /> <12>
-  
+
 </alps>
 ----
 
@@ -154,14 +154,14 @@ This example shows an ALPS profile that describes both reading and writing opera
   <data rel="profile" url="http://alps.io/profiles/useraccount" /> <1>
   <data id="body">
     <data id="title" value="User List" />
-    
+
     <data id="menu" value="Menu">
       <data id="list" rel="collection" url="..." value="Refresh List/> <4>
       <data id="login-link" name="login" url="..." rel="http://example.org/rels/login"  value="Login" /> <6>
       <data id="create-link" name="create url="..." rel="create-form" value="Create Account" /> <7>
     </data>
-        
-    <data id="current-user" value="Currrent Users" />
+
+    <data id="current-user" value="Current Users" />
       <data url="..." rel="item" name="detail" value="Mary" /> <5>
       <data url="..." rel="item" name="detail" value="Mark" /> <5>
       <data url="..." rel="item" name="detail" value="Mandy" /> <5>
@@ -171,10 +171,10 @@ This example shows an ALPS profile that describes both reading and writing opera
   </data>
 </uber>
 ----
-In the above UBER example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS decriptors applied to +UBER.data+ elements that use both the associated +ALPS.descriptor.id+ and +ALPS.descriptor.name+ values. Also note that the +ALPS.descriptor.id="name"+ element appears multiple times in the UBER representation. When a unique element in the ALPS document appears multiple times in the UBER document, the +ALPS.descriptor.id+ value is translated to the +UBER.data.name+ value.
+In the above UBER example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS descriptors applied to +UBER.data+ elements that use both the associated +ALPS.descriptor.id+ and +ALPS.descriptor.name+ values. Also note that the +ALPS.descriptor.id="name"+ element appears multiple times in the UBER representation. When a unique element in the ALPS document appears multiple times in the UBER document, the +ALPS.descriptor.id+ value is translated to the +UBER.data.name+ value.
 
 The following HTML5 representation is an example of what might be returned when a client application activates the +login-link+:
-      
+
 .UBER Representation for creating a new user account.
 ----
 <uber>
@@ -226,5 +226,3 @@ What follows is an UBER response that might be returned when activating a +detai
 
  * [[ALPS]] http://alps.io/spec
  * [[UBER]] http://uberhypermedia.com
-
-
