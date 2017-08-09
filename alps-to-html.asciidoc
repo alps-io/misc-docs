@@ -11,12 +11,12 @@ This document provides guidance on mapping ALPS descriptions to HTML representat
 == A Review of ALPS Principles
 The Application-Level Profile Semantic(ALPS)<<0,[0]>> specification is designed to describe the data elements and state transitions that make up a 'problem domain' (e.g. microblogging, accounting, etc.). ALPS documents are designed to be useful to both client and server implementors and can be used at both run-time and design-time to handle the generation and interpretation of response representations. ALPS description documents are referred to as 'profiles' or 'profile documents'.
 
-Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime 'behavior' of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profliesin order to create an actual instance of a service or client application.
+Since the aim is to support a wide set of use cases (clients, servers, run-time, design-time, etc.), ALPS profiles do not describe the runtime 'behavior' of any single system. Instead ALPS profiles describe the problem domain boundaries (e.g. the possible data elements and possible state transitions). It is up to implementors to decide how they wish to use ALPS profiles in order to create an actual instance of a service or client application.
 
 === Servers and Clients
-For server implementors, ALPS profiles establish the list of possible identifiers for data values (+givenName+, +familyName+, etc.) and transitions (+publish+, +createUser+, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is 'safe' or 'idempotent' and, in some cases, whether there are any possible arguments that can be passed with each transition. 
+For server implementors, ALPS profiles establish the list of possible identifiers for data values (+givenName+, +familyName+, etc.) and transitions (+publish+, +createUser+, etc). ALPS profiles also provide additional description information for state transitions including whether the transition is 'safe' or 'idempotent' and, in some cases, whether there are any possible arguments that can be passed with each transition.
 
-For client implementors can use the same ALPS document to as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recongize all the important data elements and state transitions emitted by that service.
+Client implementors may also use the same ALPS document as a guide for what to expect from a service which advertises support for an ALPS profile. For example, if a service announces that it uses the ALPS profile for microblogging, then any client application that was built to support the microblogging profile SHOULD be able to recognize all the important data elements and state transitions emitted by that service.
 
 == Advertising ALPS Profiles for HTML Representations
 Servers returning HTML responses can advertise the ALPS profiles they support using the following methods:
@@ -41,7 +41,7 @@ LINK: <http://alps.io/profiles/finance>;rel="profile", <http://alps.io/profiles/
 In the above case, The client application has been informed that the response MAY contain data elements and state transitions from both the 'finance' and the 'accounting' ALPS profiles.
 ====
 
-Clients accepting HTML responses SHOULD look for the ALPS profile in each of these places as appropriate to the response. If an ALPS profile reference appears in more than one location (e.g. +LINK+ header, +HTML.HEAD@profile+ attribute, and/or +HTML.LINK+ element) *all* profiles SHOULD be considered valid. 
+Clients accepting HTML responses SHOULD look for the ALPS profile in each of these places as appropriate to the response. If an ALPS profile reference appears in more than one location (e.g. +LINK+ header, +HTML.HEAD@profile+ attribute, and/or +HTML.LINK+ element) *all* profiles SHOULD be considered valid.
 
 == Basic Mapping Rules for ALPS to HTML
 The following are the basic rules for rendering ALPS profile information into valid HTML representations.
@@ -96,7 +96,7 @@ The +descriptor.type+ value is used to determine whether the HTML element should
 "idempotent", HTML.FORM+++@+++method="post"^1^
 "semantic",HTML.SPAN|DIV|P|INPUT|LI|DT|DD|SECTION|...|FORM+++@+++method="get"^2^
 |===============================
-1. Since HTML does not support idempontent transitions, the HTML.FORM element with the +method="post"+ property SHOULD be used. Server implementors are encouraged to use an additional information in the transition in order to ensure idempotency of the request. Some examples are 1) adding a unique value to the URL in the +action+ property, 2) using an additional +INPUT+ element that holds a unique value used to enforce idempotency, etc.
+1. Since HTML does not support idempotent transitions, the HTML.FORM element with the +method="post"+ property SHOULD be used. Server implementors are encouraged to use an additional information in the transition in order to ensure idempotency of the request. Some examples are 1) adding a unique value to the URL in the +action+ property, 2) using an additional +INPUT+ element that holds a unique value used to enforce idempotency, etc.
 
 2. In some cases, servers MAY use a "safe" transition to express a +descriptor.type="semantic"+ element. For example, a server might represent a +computedResult+ as an +HTML.SPAN+ element,. However, if the result is not yet computed, the server may represent +computedResult+ as an +HTML.FORM+++@+++method="get"+ with one or more +HTML.INPUT+ elements allowing the client application to fill in values in order to generate the value +computedResult+.
 
@@ -134,7 +134,7 @@ This example shows an ALPS profile that describes both reading and writing opera
 ----
 <alps>
   <link rel="self" href="http://alps.io/profiles/useraccount" /> <1>
-  
+
   <!-- data elements --> <2>
   <descriptor id="user" type="semantic" />
   <descriptor id="accessCode" type="semantic" />
@@ -142,7 +142,7 @@ This example shows an ALPS profile that describes both reading and writing opera
   <descriptor id="familyName" type="semantic" />
   <descriptor id="email" type="semantic" />
   <descriptor id="telephone" type="semantic" />
-  
+
   <!-- transitions --> <3>
   <descriptor id="list" type="safe" /> <4>
   <descriptor id="detail" type="safe" /> <5>
@@ -154,28 +154,28 @@ This example shows an ALPS profile that describes both reading and writing opera
   <descriptor id="update-form" type="idempotent" name="update" /> <10>
   <descriptor id="remove-link" type="safe" name="remove" /> <11>
   <descriptor id="remove-form" type="idempotent" name="remove" /> <12>
-  
+
 </alps>
 ----
 
 .HTML5 Representation of a list of users (with link to login and creating new accounts)
 ----
 <html>
-  <head> 
+  <head>
     <title>User List</title>
     <link rel="profile" href="http://alps.io/profiles/useraccount" /> <1>
   </head>
   <body>
     <h1>User List</h1>
-    
+
     <h2>Menu</h2>
     <ul>
       <li><a href="..." rel="collection" class="list">Refresh List</a></li> <4>
       <li><a href="..." rel="http://example.org/rels/login" class="login" data-alspid="login-link">Login</a></li> <6>
       <li><a href="..." rel="create-form" class="create" data-alpsid="create-link">Create Account</a></li> <7>
     </ul>
-    
-    <h2>Currrent Users</h2>
+
+    <h2>Current Users</h2>
     <ul>
       <li><a href="..." rel="item" class="detail">Mary</a></li> <5>
       <li><a href="..." rel="item" class="detail">Mark</a></li> <5>
@@ -187,10 +187,10 @@ This example shows an ALPS profile that describes both reading and writing opera
   </body>
 </html>
 ----
-In the above HTML5 example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS decriptors applied to +HTML.A+ elements that use the associated +descriptor.name+ value for the HTML +class+ value. Both these HTML anchors have the RECOMMENDED HTML5 Custom Data Attribute of +data-alpsid+.
+In the above HTML5 example, the Menu section shows the use of the +login-link+ and +create-link+ ALPS descriptors applied to +HTML.A+ elements that use the associated +descriptor.name+ value for the HTML +class+ value. Both these HTML anchors have the RECOMMENDED HTML5 Custom Data Attribute of +data-alpsid+.
 
 The following HTML5 representation is an example of what might be returned when a client application activates the +login-link+:
-      
+
 .HTML5 Representation for creating a new user account.
 ----
 <html>
@@ -266,5 +266,3 @@ The same approach is used to support an idempotent "remove" operation in this ne
 [[3]] 3. http://www.w3.org/TR/html4/struct/global.html#adef-profile
 
 [[4]] 4. http://www.w3.org/html/wg/drafts/html/CR/document-metadata.html#the-link-element
-
-
