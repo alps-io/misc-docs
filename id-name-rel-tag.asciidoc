@@ -1,0 +1,91 @@
+= ID, Name, Rel, & Tag
+:author: Mike Amundsen
+:email: mca@mamund.com
+:toc:
+
+[[overview]]
+== Overview
+TK
+
+[[properties]]
+== Properties Of Interest
+The ALPS <<alps, [ALPS]>> specification has a handful of properties designed to help identify elements of interest in a document. These properties are:
+
+ * +id+
+ * +name+
+ * +rel+
+ * +tag+ (proposed)
+
+While each of these tags has a similar task (identifying +descriptor+ elements of interest), they have varying degrees of "accuracy" and play varying roles in decorating an ALPS specification. Below is a review of each property and the ways in which they can be used to identify +descriptor+ elements.
+
+[[id]]
+=== +id+
+The +id+ property is designed to hold a single, document-wide unique value <<alps-id, [ALPS-ID]>>. This allows document authors and consumers to share an exact identifier for an ALPS +descriptor+. For example: 
+
+----
+descriptor: [
+    {id:"familyName" ...}
+  ]
+}
+----
+
+In design-time documents (e.g. OpenAPI <<open-api, [OPEN-API]>>), the +id+ property can be mapped to similar unique elements. For example, the +operationId+ property from the OpenAPI specification.
+
+In run-time documents (e.g. HTML5 <<html5, [HTML5]>>), the +id+ property can be mapped to similar unique elements. For example, the +id+ property from the HTML5 specification.
+
+.GUIDANCE
+****
+Use the +id+ property when you need a single document-wide unique value to identify a +descriptor+.
+****
+
+[[name]]
+=== +name+
+The +name+ property is designed to hold a single, non-unique value <<alps-name, ALPS-NAME>>. This allows document authors to apply an identifier to a +descriptor+ that might 'repeat' within the response. For example:
+
+----
+descriptor: [
+    {id:"fn_001" name="familyName" ...}
+  ]
+}
+----
+
+In design-time documents (e.g. OpenAPI), the +name+ property can be mapped to similar non-unique elements. For example, the +parameter.name+ property of the OpenAPI specification.
+
+In run-time documents (e.g. HTML5), the +name+ property can be mapped to similar non-unique elements. For example the +input.name+ property from the HTML5 specification.
+
+.GUIDANCE
+****
+Use the +name+ property when you need a single, non-unique value to identify a +descriptor+.
+****
+
+[[rel]]
+=== +rel+
+The +rel+ property is designed to hold a whitespace-separated list of valid link relation <<link-rel, LINK-REL>> values. The values in this property SHOULD all be valid link-rel values (e.g. registered strings or <<rfc588, [RFC588]>> compliant values. This allows document authors to apply multiple link relation values to a single +descriptor+. For example:
+
+----
+descriptor: [
+    {name="help" rel="help item http://rel.example.com/helpfile" ... }
+  ]
+}
+----
+
+In design-time documents (e.g. OpenAPI, the +rel+ property SHOULD be mapped to similar elements. For eample the the +rel+ property of a +link+ Header.
+
+ 
+
+[[tag]]
+=== +tag+
+TK
+
+[[other]]
+== Other Considerations
+TK
+
+[[references]]
+== References
+
+ * [[alps]] [ALPS] https://datatracker.ietf.org/doc/draft-amundsen-richardson-foster-alps/ 
+ * [[alps-id]] [ALPS-ID] https://tools.ietf.org/html/draft-amundsen-richardson-foster-alps-05#section-2.2.8
+ * [[open-api]] [OPEN-API] http://spec.openapis.org/oas/v3.0.3
+ * [[html5]] [HTML5] https://html.spec.whatwg.org/
+ * [[link-rel]] [LINK-REL] https://www.iana.org/assignments/link-relations/link-relations.xhtml
