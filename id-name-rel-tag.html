@@ -744,9 +744,76 @@ asciidoc.install(2);
 </div>
 <div id="content">
 <div class="sect1">
+<h2 id="_status">Status</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Doc Status
+</dt>
+<dd>
+<p>
+  <strong><span class="white red-background">Working Draft</span></strong>&#8201;&#8212;&#8201;<em>Only experimental and &#8216;proof-of-concept&#8217; apps should be built on this unstable draft.</em>
+</p>
+</dd>
+<dt class="hdlist1">
+Repository
+</dt>
+<dd>
+<p>
+  <a href="https://github.com/alps-io/misc-docs">https://github.com/alps-io/misc-docs</a>
+</p>
+</dd>
+<dt class="hdlist1">
+Last Updated
+</dt>
+<dd>
+<p>
+  2020-12-17
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="overview">Overview</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>TK</p></div>
+<div class="paragraph"><p>This document offers general guidance on how to use various ALPS <code>descriptor</code> identifer properties and how these ALPS properties map to similar properties in design-time (e.g. OpenAPI) and run-time (e.g. HTML) documents produced from the ALPS description document.</p></div>
+<div class="paragraph"><p>Below is a quick summary of the guidance:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<code>id</code>
+</dt>
+<dd>
+<p>
+Use the <code>id</code> property when you need a single document-wide unique value to identify a single <code>descriptor</code>.
+</p>
+</dd>
+<dt class="hdlist1">
+<code>name</code>
+</dt>
+<dd>
+<p>
+Use the <code>name</code> property when you need a single, non-unique value to identify one or more <code>descriptor</code> elements.
+</p>
+</dd>
+<dt class="hdlist1">
+<code>rel</code>
+</dt>
+<dd>
+<p>
+Use the <code>rel</code> property when you need a multi-valued, non-unique, well-documented public value to identify one or more <code>descriptor</code> elements.
+</p>
+</dd>
+<dt class="hdlist1">
+<code>tag</code>
+</dt>
+<dd>
+<p>
+Use the <code>tag</code> property when you need a multi-valued, non-unique, locally understood, private value to identify one or more <code>descriptor</code> elements.
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>For details, see below.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -791,7 +858,7 @@ asciidoc.install(2);
 <div class="sidebarblock">
 <div class="content">
 <div class="title">GUIDANCE</div>
-<div class="paragraph"><p>Use the <code>id</code> property when you need a single document-wide unique value to identify a <code>descriptor</code>.</p></div>
+<div class="paragraph"><p>Use the <code>id</code> property when you need a single document-wide unique value to identify a single <code>descriptor</code>.</p></div>
 </div></div>
 </div>
 <div class="sect2">
@@ -809,7 +876,7 @@ asciidoc.install(2);
 <div class="sidebarblock">
 <div class="content">
 <div class="title">GUIDANCE</div>
-<div class="paragraph"><p>Use the <code>name</code> property when you need a single, non-unique value to identify a <code>descriptor</code>.</p></div>
+<div class="paragraph"><p>Use the <code>name</code> property when you need a single, non-unique value to identify one or more <code>descriptor</code> elements.</p></div>
 </div></div>
 </div>
 <div class="sect2">
@@ -822,18 +889,75 @@ asciidoc.install(2);
   ]
 }</code></pre>
 </div></div>
-<div class="paragraph"><p>In design-time documents (e.g. OpenAPI, the <code>rel</code> property SHOULD be mapped to similar elements. For eample the the <code>rel</code> property of a <code>link</code> Header.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">The valid values for the <code>rel</code> property are governed by <a href="#rfc588">[RFC588]</a>. ALPS document authors SHOULD only use the <code>rel</code> property when they wish to use well-documented, public values as identifiers.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>In design-time documents (e.g. OpenAPI), the <code>rel</code> property SHOULD be mapped to similar elements. For example the the <code>rel</code> property of a <code>link</code> Header.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>need example here</code></pre>
+</div></div>
+<div class="paragraph"><p>In run-time document (e.g. HTML5), the <code>rel</code> property can be mapped to the same property. For example, the <code>rel</code> property of an anchor (<code>a</code>) tag:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt; href="http://ui.example.org/search"
+  rel="search collection http://rels.example.org/customers"&gt;Search&lt;/a&gt;</code></pre>
+</div></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">GUIDANCE</div>
+<div class="paragraph"><p>Use the <code>rel</code> property when you need a multi-valued, non-unique, well-documented public value to identify one or more <code>descriptor</code> elements.</p></div>
+</div></div>
 </div>
 <div class="sect2">
 <h3 id="tag"><code>tag</code></h3>
-<div class="paragraph"><p>TK</p></div>
+<div class="paragraph"><p>the <code>tag</code> property is designed to hold a whitespace-separated list of non-unique private values. The values in this property are typically used by document authors to mark one or more <code>descriptors</code> with identifiers that parsers and other document consumers can use to group and/or process portions of the ALPS document.</p></div>
+<div class="paragraph"><p>For example, the following <code>tag</code> contains information that might be used by an ALPS utility that produces protobuf documents:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt;descriptor id="user" tag="proto3 users"&gt;
+  &lt;descriptor href="#id" /&gt;
+  &lt;descriptor href="#userName" /&gt;
+  &lt;descriptor href="#password" /&gt;
+  &lt;descriptor href="#email" /&gt;
+&lt;/descriptor&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>In design-time document (e.g. OpenAPI), the <code>tag</code> property SHOULD be mapped to similar elements. For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>paths:
+  /users/search:
+    get:
+      summary: returns a filtered list of users
+      tags:
+        - users
+      ...</code></pre>
+</div></div>
+<div class="paragraph"><p>In run-time documents (e.g. HtML5), the <code>tag</code> property SHOULD be mapped to similar elements. For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt;ul id="user01" class="users"&gt;
+  &lt;li&gt;Orson Ork&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">GUIDANCE</div>
+<div class="paragraph"><p>Use the <code>tag</code> property when you need a multi-valued, non-unique, locally understood, private value to identify one or more <code>descriptor</code> elements.</p></div>
+</div></div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="other">Other Considerations</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>TK</p></div>
+<div class="paragraph"><p>The mapping of <code>id</code>, <code>name</code>, <code>rel</code>, and <code>tag</code> properties in an ALPS document to similar values in design-time and run-time documents varies and is governed by approved existing ALPS Mapping documents.  It is a good idea to include a <code>link</code> element in your ALPS document that points to the mapping reference. If not definitive mapping reference exists for your use case, ALPS document authors SHOULD create their own mapping document that explains the way ALPS elements are to be mapped to the target design-time or run-time format.</p></div>
+<div class="paragraph"><p>See "ALPS Mapping Guidelines for HTML" <a href="#alps-html">[ALPS-HTML]</a> and "ALPS Mapping Guidelines for UBER" <a href="#alps-uber">[ALPS-UBER]</a> for details on how to write ampping guidelines for other formats.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -865,6 +989,16 @@ asciidoc.install(2);
 <a id="link-rel"></a> [LINK-REL] <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">https://www.iana.org/assignments/link-relations/link-relations.xhtml</a>
 </p>
 </li>
+<li>
+<p>
+<a id="alps-html"></a> [ALPS-HTML] <a href="https://github.com/alps-io/misc-docs/blob/master/alps-to-html.asciidoc">https://github.com/alps-io/misc-docs/blob/master/alps-to-html.asciidoc</a>
+</p>
+</li>
+<li>
+<p>
+<a id="alps-uber"></a> [ALPS-UBER] <a href="https://github.com/alps-io/misc-docs/blob/master/alps-to-uber.asciidoc">https://github.com/alps-io/misc-docs/blob/master/alps-to-uber.asciidoc</a>
+</p>
+</li>
 </ul></div>
 </div>
 </div>
@@ -873,7 +1007,7 @@ asciidoc.install(2);
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2020-12-09 20:21:25 EST
+ 2020-12-17 10:07:21 EST
 </div>
 </div>
 </body>

@@ -3,9 +3,33 @@
 :email: mca@mamund.com
 :toc:
 
+== Status
+Doc Status:: 
+  *[white red-background]#Working Draft#* -- _Only experimental and `proof-of-concept' apps should be built on this unstable draft._
+Repository::
+  https://github.com/alps-io/misc-docs
+Last Updated::
+  {docdate}
+  
 [[overview]]
 == Overview
-TK
+This document offers general guidance on how to use various ALPS +descriptor+ identifer properties and how these ALPS properties map to similar properties in design-time (e.g. OpenAPI) and run-time (e.g. HTML) documents produced from the ALPS description document.
+
+Below is a quick summary of the guidance:
+
++id+::
+Use the +id+ property when you need a single document-wide unique value to identify a single +descriptor+.
+
++name+::
+Use the +name+ property when you need a single, non-unique value to identify one or more +descriptor+ elements.
+
++rel+::
+Use the +rel+ property when you need a multi-valued, non-unique, well-documented public value to identify one or more +descriptor+ elements.
+
++tag+::
+Use the +tag+ property when you need a multi-valued, non-unique, locally understood, private value to identify one or more +descriptor+ elements.
+
+For details, see below.
 
 [[properties]]
 == Properties Of Interest
@@ -35,7 +59,7 @@ In run-time documents (e.g. HTML5 <<html5, [HTML5]>>), the +id+ property can be 
 
 .GUIDANCE
 ****
-Use the +id+ property when you need a single document-wide unique value to identify a +descriptor+.
+Use the +id+ property when you need a single document-wide unique value to identify a single +descriptor+.
 ****
 
 [[name]]
@@ -55,7 +79,7 @@ In run-time documents (e.g. HTML5), the +name+ property can be mapped to similar
 
 .GUIDANCE
 ****
-Use the +name+ property when you need a single, non-unique value to identify a +descriptor+.
+Use the +name+ property when you need a single, non-unique value to identify one or more +descriptor+ elements.
 ****
 
 [[rel]]
@@ -69,17 +93,71 @@ descriptor: [
 }
 ----
 
-In design-time documents (e.g. OpenAPI, the +rel+ property SHOULD be mapped to similar elements. For eample the the +rel+ property of a +link+ Header.
+NOTE: The valid values for the +rel+ property are governed by <<rfc588, [RFC588]>>. ALPS document authors SHOULD only use the +rel+ property when they wish to use well-documented, public values as identifiers.
 
- 
+In design-time documents (e.g. OpenAPI), the +rel+ property SHOULD be mapped to similar elements. For example the the +rel+ property of a +link+ Header.
+
+----
+need example here
+----
+
+In run-time document (e.g. HTML5), the +rel+ property can be mapped to the same property. For example, the +rel+ property of an anchor (+a+) tag:
+
+----
+< href="http://ui.example.org/search" 
+  rel="search collection http://rels.example.org/customers">Search</a> 
+----
+
+.GUIDANCE
+****
+Use the +rel+ property when you need a multi-valued, non-unique, well-documented public value to identify one or more +descriptor+ elements.
+****
 
 [[tag]]
 === +tag+
-TK
+the +tag+ property is designed to hold a whitespace-separated list of non-unique private values. The values in this property are typically used by document authors to mark one or more +descriptors+ with identifiers that parsers and other document consumers can use to group and/or process portions of the ALPS document.
+
+For example, the following +tag+ contains information that might be used by an ALPS utility that produces protobuf documents:
+
+----
+<descriptor id="user" tag="proto3 users">
+  <descriptor href="#id" />
+  <descriptor href="#userName" />
+  <descriptor href="#password" />
+  <descriptor href="#email" />
+</descriptor>
+----
+
+In design-time document (e.g. OpenAPI), the +tag+ property SHOULD be mapped to similar elements. For example:
+
+----
+paths:
+  /users/search:
+    get:
+      summary: returns a filtered list of users
+      tags:
+        - users
+      ...
+----
+
+In run-time documents (e.g. HtML5), the +tag+ property SHOULD be mapped to similar elements. For example:
+
+----
+<ul id="user01" class="users">
+  <li>Orson Ork</li>
+</ul>
+----
+
+.GUIDANCE
+****
+Use the +tag+ property when you need a multi-valued, non-unique, locally understood, private value to identify one or more +descriptor+ elements.
+****
 
 [[other]]
 == Other Considerations
-TK
+The mapping of +id+, +name+, +rel+, and +tag+ properties in an ALPS document to similar values in design-time and run-time documents varies and is governed by approved existing ALPS Mapping documents.  It is a good idea to include a +link+ element in your ALPS document that points to the mapping reference. If not definitive mapping reference exists for your use case, ALPS document authors SHOULD create their own mapping document that explains the way ALPS elements are to be mapped to the target design-time or run-time format.
+
+See "ALPS Mapping Guidelines for HTML" <<alps-html, [ALPS-HTML]>> and "ALPS Mapping Guidelines for UBER" <<alps-uber, [ALPS-UBER]>> for details on how to write ampping guidelines for other formats.
 
 [[references]]
 == References
@@ -89,3 +167,6 @@ TK
  * [[open-api]] [OPEN-API] http://spec.openapis.org/oas/v3.0.3
  * [[html5]] [HTML5] https://html.spec.whatwg.org/
  * [[link-rel]] [LINK-REL] https://www.iana.org/assignments/link-relations/link-relations.xhtml
+ * [[alps-html]] [ALPS-HTML] https://github.com/alps-io/misc-docs/blob/master/alps-to-html.asciidoc
+ * [[alps-uber]] [ALPS-UBER] https://github.com/alps-io/misc-docs/blob/master/alps-to-uber.asciidoc
+ 
