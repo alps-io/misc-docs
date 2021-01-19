@@ -1,0 +1,47 @@
+= ALPS Tools
+:author: Mike Amundsen
+:email: mca@mamund.com
+:toc:
+:numbered:
+
+== Status
+Doc Status:: 
+  *[white red-background]#Working Draft#* -- _This is a working list of known tools using and/or supporting the use of the ALPS specification._
+Repository::
+  https://github.com/alps-io/misc-docs
+Last Updated::
+  {docdate}
+
+== Summary
+This document exists as a place to list any tools, apps, frameworks, papers, blog posts, etc. that are related to the ALPS specification.  Feel free to do a PR on this doc to add your entries.
+
+== Tooling
+A list of availble tools, apps, frameworks that support ALPS.
+
+ . https://github.com/tkawa/alpinist-ruby[Alpinist] : ALPS (Application-Level Profile Semantics) processor for Ruby
+ . https://github.com/koriym/app-state-diagram[Application State Diagram (ASD)] : Reads ALPS documents and produces a full state diagram and hyperlinked documentation
+ . https://github.com/filip26/alps-cli[alps-cli] : https://github.com/filip26/alps-cli
+ . http://tkawa.github.io/alps-console/[ALPS Console] : ALPS Console is an implementation of a generic API client for ALPS-based Web APIs in the form of a single-page application. (WIP)
+ . https://github.com/smizell/alps-writer[alps-writer] : Tools for writing ALPS documents
+ . https://github.com/mmuller88/cdk-alps-spec-rest-api[cdk-alps-spec-rest-api] : Generates an AWS API Gateway out of an ALPS API yaml file
+ . https://github.com/mmuller88/alps-unified-ts[alps-unified-ts] : an enhanced TypeScript library of alps-unified. 
+ . https://github.com/mamund/alps-unified[unified] : Utility for converting ALPS API description documents into API Definition documents (OpenAPI, Proto, etc.)
+ . https://github.com/cometaj2/I-D/tree/master/hal-alps[hal-alps I-D] :  Internet-Draft for HAL ALPS bindings.
+
+== Writings
+A partial list of articles, blog posts, etc. that discuss ALPS.
+
+ * http://alps.io[ALPS Home Page]
+ * https://en.wikipedia.org/wiki/Application-Level_Profile_Semantics_(ALPS)[Wikipedia Entry for ALPS]
+ * https://datatracker.ietf.org/doc/draft-amundsen-richardson-foster-alps/[Application-Level Profile Semantics (ALPS)] at IETF
+ * https://www.infoq.com/articles/programming-semantic-profiles/[Programming with Semantic Profiles: In the Land of Magic Strings, the Profile-Aware is King], July 2015
+ * https://portswigger.net/daily-swig/misconfigurations-in-spring-data-projects-could-leave-web-apps-open-to-abuse[Misconfigurations in Spring Data projects could leave web apps open to abuse]
+ * https://docs.spring.io/spring-data/rest/docs/current/reference/html/#metadata[Application-Level Profile Semantics (ALPS)] in Spring REST
+ * https://www.infoq.com/presentations/web-api-alps/[Generic Hypermedia and Domain-Specific APIs: RESTing in the ALPS] Presentation, 2013
+ * https://www.infoq.com/articles/web-api-design-methodology/[A Web API Design Methodology], December 2014
+ * https://www.youtube.com/watch?v=XopFgJzVY-o[GraphQL, gRPC and REST, Oh My! : A Method for Unified API Design], September 2020
+ * https://apievangelist.com/2017/09/27/api-design-industry-guide-applicationlevel-profile-semantics-alps/[API Design Industry Guide: Application-Level Profile Semantics (ALPS)], September 2017
+ * http://webconcepts.info/specs/IETF/I-D/amundsen-richardson-foster-alps[Application-Level Profile Semantics (ALPS)] at Web Concepts
+ * https://martinmueller.dev/alps-unified-eng/[ALPS Helper Library], December 2020
+ * https://qiita.com/koriym/items/2e928efb2167d559052e[Media Type and ALPS Profile], Decmeber 2020
+ 
